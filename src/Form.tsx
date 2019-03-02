@@ -15,7 +15,9 @@ class MainForm extends Component {
     floornumber: "",
     apartmentaddress: "",
     EntranceDate: "",
-    LeaveDate: ""
+    LeaveDate: "",
+    AdditionalSection1: "",
+    AdditionalSection2: ""
   };
 
   getlessorIdType = () => {
@@ -165,6 +167,22 @@ class MainForm extends Component {
               }
             />
           </FormItem>
+          <FormItem text="1הוסף סעיף">
+          <input
+              value={this.state.AdditionalSection1}
+              onChange={({ target }) =>
+                this.setState({ AdditionalSection1: target.value })
+              }
+            />
+          </FormItem>
+          <FormItem text="2הוסף סעיף">
+          <input
+              value={this.state.AdditionalSection2}
+              onChange={({ target }) =>
+                this.setState({ AdditionalSection2: target.value })
+              }
+            />
+          </FormItem>
         </div>
         <div
           style={{
@@ -275,6 +293,14 @@ class MainForm extends Component {
             </div>
           </div>
           <div style={{ display: "flex" }}>
+            <p style={{ marginLeft: 20}}>2.</p>
+            <div style={{ flex: 1 }}>
+              <p style={{ textAlign: "justify" }}>
+                {`${this.state.AdditionalSection1} `}
+              </p>
+            </div>
+          </div>
+          <div style={{ display: "flex" }}>
             <p style={{ marginLeft: 20, fontWeight: "bold", textDecoration: "underline"}}>הצהרות השוכר</p>
           </div>
           <div style={{ display: "flex" }}>
@@ -306,6 +332,14 @@ class MainForm extends Component {
             <div style={{ flex: 1 }}>
               <p>
                 {`השוכר מצהיר כי הוא בדק את המושכר ומצא אותו תקין ובמצב המתאים לצרכי מגוריו בו, וזאת לשביעות רצונו. השוכר מוותר בזאת על כל טענה או תביעה שתהיה לו, אם תהיה, ביחס לאי התאמה במושכר. `} 
+              </p>
+            </div>
+          </div>
+          <div style={{ display: "flex" }}>
+            <p style={{ marginLeft: 20}}>2.</p>
+            <div style={{ flex: 1 }}>
+              <p style={{ textAlign: "justify" }}>
+                {`${this.state.AdditionalSection2} `}
               </p>
             </div>
           </div>
