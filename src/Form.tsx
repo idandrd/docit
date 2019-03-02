@@ -223,7 +223,21 @@ class MainForm extends Component {
             <p style={{ marginLeft: 20 }}>והואיל:</p>
             <div style={{ flex: 1 }}>
               <p>{`  והמשכיר מעוניין להשכיר לשוכר את המושכר בשכירות בלתי מוגנת, והשוכר מעוניין לשכור מהמשכיר את המושכר בשכירות בלתי מוגנת, והכל בכפוף לתנאי הסכם זה;
-                `}</p>
+              `}</p>
+            </div>
+          </div>
+          <div style={{ display: "flex" }}>
+            <div style={{ flex: 1 }}>
+          <p style={{ textAlign: "center", fontWeight: "bold" }}>{`ולפיכך הוסכם והותנה בין הצדדים כדלקמן:`}</p>
+          <p style={{ marginLeft: 70, fontWeight: "bold", textDecoration: "underline" }}>מבוא</p>
+            </div>
+          </div>
+          <div style={{ display: "flex" }}>
+            <p style={{ marginLeft: 20}}>1.</p>
+            <div style={{ flex: 1 }}>
+              <p>
+                {`המבוא להסכם זה מהווה חלק בלתי נפרד הימנו. אין לפרש הוראה מהוראותיו בניגוד למשמעות הטבעית והרגילה של מילות הסכם זה.`}
+              </p>
             </div>
           </div>
         </div>
@@ -237,7 +251,7 @@ const FormItem = (props: { text: string; children: any }) => (
     style={{
       display: "flex",
       justifyContent: "space-between",
-      marginBottom: 10
+      marginBottom: 20
     }}
   >
     <div>{props.text}</div>
