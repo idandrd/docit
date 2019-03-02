@@ -4,18 +4,18 @@ class MainForm extends Component {
   state = {
     signedAtCity: "",
     signedAtDate: "",
-    leaserName: "",
-    leaserIdType: "private",
-    leaserId: "",
-    leaserFullAddress: "",
+    lessorName: "",
+    lessorIdType: "private",
+    lessorId: "",
+    lessorFullAddress: "",
     leasorName: "",
     leasorId: "",
     leasorFullAddress: ""
   };
 
-  getLeaserIdType = () => {
+  getlessorIdType = () => {
     const type: "private" | "company" | "ngo" | "partnership" = this.state
-      .leaserIdType as any;
+      .lessorIdType as any;
     switch (type) {
       case "private":
         return "ת.ז.";
@@ -59,18 +59,18 @@ class MainForm extends Component {
           </FormItem>
           <FormItem text="שם המשכיר:">
             <input
-              value={this.state.leaserName}
+              value={this.state.lessorName}
               onChange={({ target }) =>
-                this.setState({ leaserName: target.value })
+                this.setState({ lessorName: target.value })
               }
             />
           </FormItem>
           <FormItem text="סוג זיהוי המשכיר:">
             <select
               style={{ width: 132 }}
-              value={this.state.leaserIdType}
+              value={this.state.lessorIdType}
               onChange={({ target }) =>
-                this.setState({ leaserIdType: target.value })
+                this.setState({ lessorIdType: target.value })
               }
             >
               <option value="private">אדם פרטי</option>
@@ -81,17 +81,17 @@ class MainForm extends Component {
           </FormItem>
           <FormItem text="מספר הזיהוי (משכיר):">
             <input
-              value={this.state.leaserId}
+              value={this.state.lessorId}
               onChange={({ target }) =>
-                this.setState({ leaserId: target.value })
+                this.setState({ lessorId: target.value })
               }
             />
           </FormItem>
           <FormItem text="כתובת מלאה (משכיר):">
             <input
-              value={this.state.leaserFullAddress}
+              value={this.state.lessorFullAddress}
               onChange={({ target }) =>
-                this.setState({ leaserFullAddress: target.value })
+                this.setState({ lessorFullAddress: target.value })
               }
             />
           </FormItem>
@@ -145,10 +145,10 @@ class MainForm extends Component {
             <p style={{ marginLeft: 100, fontWeight: "bold" }}>בין</p>
             <div style={{ flex: 1 }}>
               <p>
-                {`${this.state.leaserName} ${this.getLeaserIdType()} ${this
-                  .state.leaserId || "________________________"}`}
+                {`${this.state.lessorName} ${this.getlessorIdType()} ${this
+                  .state.lessorId || "________________________"}`}
               </p>
-              <p>{`מ${this.state.leaserFullAddress ||
+              <p>{`מ${this.state.lessorFullAddress ||
                 " __________________________"}`}</p>
               <p>
                 (להלן "<b>המשכיר</b>")
