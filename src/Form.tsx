@@ -8,9 +8,12 @@ class MainForm extends Component {
     lessorIdType: "private",
     lessorId: "",
     lessorFullAddress: "",
-    leasorName: "",
-    leasorId: "",
-    leasorFullAddress: ""
+    lesseeName: "",
+    lesseeId: "",
+    lesseeFullAddress: "",
+    roomnuber: "",
+    floornumber: "",
+    apartmentaddress: ""
   };
 
   getlessorIdType = () => {
@@ -97,25 +100,49 @@ class MainForm extends Component {
           </FormItem>
           <FormItem text="שם השוכר:">
             <input
-              value={this.state.leasorName}
+              value={this.state.lesseeName}
               onChange={({ target }) =>
-                this.setState({ leasorName: target.value })
+                this.setState({ lesseeName: target.value })
               }
             />
           </FormItem>
           <FormItem text="מספר הזיהוי (השוכר):">
             <input
-              value={this.state.leasorId}
+              value={this.state.lesseeId}
               onChange={({ target }) =>
-                this.setState({ leasorId: target.value })
+                this.setState({ lesseeId: target.value })
               }
             />
           </FormItem>
           <FormItem text="כתובת מלאה (השוכר):">
             <input
-              value={this.state.leasorFullAddress}
+              value={this.state.lesseeFullAddress}
               onChange={({ target }) =>
-                this.setState({ leasorFullAddress: target.value })
+                this.setState({ lesseeFullAddress: target.value })
+              }
+            />
+          </FormItem>
+          <FormItem text="כמה חדרים יש במושכר?">
+            <input
+              value={this.state.roomnuber}
+              onChange={({ target }) =>
+                this.setState({ roomnuber: target.value })
+              }
+            />
+          </FormItem>
+          <FormItem text="באיזה קומה המושכר?">
+            <input
+              value={this.state.floornumber}
+              onChange={({ target }) =>
+                this.setState({ floornumber: target.value })
+              }
+            />
+          </FormItem>
+          <FormItem text="מהי כתובת הדירה המושכרת?">
+            <input
+              value={this.state.apartmentaddress}
+              onChange={({ target }) =>
+                this.setState({ apartmentaddress: target.value })
               }
             />
           </FormItem>
@@ -142,7 +169,7 @@ class MainForm extends Component {
             this.state.signedAtDate
           }`}</p>
           <div style={{ display: "flex" }}>
-            <p style={{ marginLeft: 100, fontWeight: "bold" }}>בין</p>
+            <p style={{ marginLeft: 70, fontWeight: "bold" }}>בין</p>
             <div style={{ flex: 1 }}>
               <p>
                 {`${this.state.lessorName} ${this.getlessorIdType()} ${this
@@ -159,13 +186,13 @@ class MainForm extends Component {
             </div>
           </div>
           <div style={{ display: "flex" }}>
-            <p style={{ marginLeft: 100, fontWeight: "bold" }}>לבין</p>
+            <p style={{ marginLeft: 70, fontWeight: "bold" }}>לבין</p>
             <div style={{ flex: 1 }}>
               <p>
-                {`${this.state.leasorName} ת.ז. ${this.state.leasorId ||
+                {`${this.state.lesseeName} ת.ז. ${this.state.lesseeId ||
                   "________________________"}`}
               </p>
-              <p>{`מ${this.state.leasorFullAddress ||
+              <p>{`מ${this.state.lesseeFullAddress ||
                 " __________________________"}`}</p>
               <p>
                 (להלן "<b>השוכר</b>")
@@ -173,6 +200,30 @@ class MainForm extends Component {
               <p style={{ textDecoration: "underline", textAlign: "left" }}>
                 מצד שני
               </p>
+            </div>
+          </div>
+          <div style={{ display: "flex" }}>
+            <p style={{ marginLeft: 20 }}>הואיל:</p>
+            <div style={{ flex: 1 }}>
+              <p>{`  והמשכיר הוא בעל הזכויות והמחזיק הבלעדי של דירה בת${this.state.roomnuber ||
+                "___"} חדרים, בקומה  ${this.state.floornumber ||
+                  "___"}  הנמצאת ב${this.state.apartmentaddress ||"__________________________" } וכן מיטלטלין כאמור ברשימה המצ"ב כנספח א' 
+                  `}(להלן "<b>המושכר</b>");</p>
+            </div>
+          </div>
+          <div style={{ display: "flex" }}>
+            <p style={{ marginLeft: 20 }}>והואיל:</p>
+            <div style={{ flex: 1 }}>
+              <p>{`  ולשוכר ידוע כי ביום תחילתו של חוק הגנת הדייר (נוסח משולב), התשל"ב-1972 ו/או ביום${this.state.signedAtDate ||
+                "___"} ולאחר מכן היה המושכר פנוי ולא היה דייר שהיה זכאי להחזיק בו, וכי לא יחולו ביחס למושכר הוראות חוק הגנת הדייר ו/או כל הוראות הבאות להגביל את השכירות;
+                `}</p>
+            </div>
+          </div>
+          <div style={{ display: "flex" }}>
+            <p style={{ marginLeft: 20 }}>והואיל:</p>
+            <div style={{ flex: 1 }}>
+              <p>{`  והמשכיר מעוניין להשכיר לשוכר את המושכר בשכירות בלתי מוגנת, והשוכר מעוניין לשכור מהמשכיר את המושכר בשכירות בלתי מוגנת, והכל בכפוף לתנאי הסכם זה;
+                `}</p>
             </div>
           </div>
         </div>
