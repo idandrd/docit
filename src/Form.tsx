@@ -224,7 +224,7 @@ class MainForm extends Component {
           <div style={{ display: "flex" }}>
             <p style={{ marginLeft: 20 }}>הואיל:</p>
             <div style={{ flex: 1 }}>
-              <p>{`  והמשכיר הוא בעל הזכויות והמחזיק הבלעדי של דירה בת${this.state.roomnuber ||
+              <p style={{ textAlign: "justify" }}>{`  והמשכיר הוא בעל הזכויות והמחזיק הבלעדי של דירה בת${this.state.roomnuber ||
                 "___"} חדרים, בקומה  ${this.state.floornumber ||
                   "___"}  הנמצאת ב${this.state.apartmentaddress ||"__________________________" } וכן מיטלטלין כאמור ברשימה המצ"ב כנספח א' 
                   `}(להלן "<b>המושכר</b>");</p>
@@ -265,7 +265,7 @@ class MainForm extends Component {
           <div style={{ display: "flex" }}>
             <p style={{ marginLeft: 20}}>2.</p>
             <div style={{ flex: 1 }}>
-              <p>
+              <p style={{ textAlign: "justify" }}>
                 {`המשכיר משכיר בזאת את המושכר בשכירות בלתי מוגנת לשוכר, והשוכר שוכר בזאת את המושכר בשכירות בלתי מוגנת לתקופה בת(יציג את התאריך בין 2 התאריכים שהוזנו) חודשים החל מיום ${
             this.state.EntranceDate ||"____________"
           } ועד יום ${
