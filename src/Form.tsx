@@ -17,7 +17,9 @@ class MainForm extends Component {
     EntranceDate: "",
     LeaveDate: "",
     AdditionalSection1: "",
-    AdditionalSection2: ""
+    AdditionalSection2: "",
+    monthlypayment: "",
+    paymentday: ""
   };
 
   getlessorIdType = () => {
@@ -32,6 +34,21 @@ class MainForm extends Component {
         return "ע.ר.";
       case "partnership":
         return "ש.ר.";
+    }
+  };
+
+  getpaymentday = () => {
+    const type: "1th" | "10th" | "15th" | "otherth" = this.state
+      .paymentday as any;
+    switch (type) {
+      case "1th":
+        return "1";
+      case "10th":
+        return "10";
+      case "15th":
+        return "15";
+      case "otherth":
+        return "_______";
     }
   };
   
@@ -49,7 +66,7 @@ class MainForm extends Component {
             width: 400
           }}
         >
-          <FormItem text="היכן נחתם החוזה (עיר/יישוב)?">
+          <FormItem  text="היכן נחתם החוזה (עיר/יישוב)?" >
             <input
               value={this.state.signedAtCity}
               onChange={({ target }) =>
@@ -136,7 +153,7 @@ class MainForm extends Component {
             />
           </FormItem>
           <FormItem text="באיזה קומה המושכר?">
-            <input
+            <input id="ex2"
               value={this.state.floornumber}
               onChange={({ target }) =>
                 this.setState({ floornumber: target.value })
@@ -176,12 +193,34 @@ class MainForm extends Component {
             />
           </FormItem>
           <FormItem text="2הוסף סעיף">
-          <input
+          <input 
               value={this.state.AdditionalSection2}
               onChange={({ target }) =>
                 this.setState({ AdditionalSection2: target.value })
               }
             />
+          </FormItem>
+          <FormItem text="מהו גובה שכר הדירה החודשי הנדרש?">
+          <input 
+              value={this.state.monthlypayment}
+              onChange={({ target }) =>
+                this.setState({ monthlypayment: target.value })
+              }
+            />
+          </FormItem>
+          <FormItem text="באיזה יום בחודש ידרש המשכיר לשלם את שכר הדירה / התמורה?">
+          <select
+              style={{ width: 132 }}
+              value={this.state.paymentday}
+              onChange={({ target }) =>
+                this.setState({ paymentday: target.value })
+              }
+            >
+              <option value="1th">לחודש 1</option>
+              <option value="10th"> לחודש 10</option>
+              <option value="15th">עמותה</option>
+              <option value="otherth">אחר(ידנית)</option>
+            </select>
           </FormItem>
         </div>
         <div
@@ -204,17 +243,19 @@ class MainForm extends Component {
           <p style={{ textAlign: "center" }}>{`חוזה שנערך ונחתם ב${this.state
             .signedAtCity || "______________"} בתאריך ${
             this.state.signedAtDate || "_____________"
-          }`}</p>
-          <div style={{ display: "flex" }}>
+          }`}
+          </p>
+          
+          <div style={{ display: "flex", }}>
             <p style={{ marginLeft: 70, fontWeight: "bold" }}>בין</p>
             <div style={{ flex: 1 }}>
               <p>
                 {`${this.state.lessorName} ${this.getlessorIdType()} ${this
                   .state.lessorId || "________________________"}`}
               </p>
-              <p>{`מ${this.state.lessorFullAddress ||
+              <p style={{ marginTop:-10}}>{`מ${this.state.lessorFullAddress ||
                 " __________________________"}`}</p>
-              <p>
+              <p style={{ marginTop:-10}}>
                 (להלן "<b>המשכיר</b>")
               </p>
               <p style={{ textDecoration: "underline", textAlign: "left" }}>
@@ -229,9 +270,9 @@ class MainForm extends Component {
                 {`${this.state.lesseeName} ת.ז. ${this.state.lesseeId ||
                   "________________________"}`}
               </p>
-              <p>{`מ${this.state.lesseeFullAddress ||
+              <p style={{ marginTop:-10}}>{`מ${this.state.lesseeFullAddress ||
                 " __________________________"}`}</p>
-              <p>
+              <p style={{ marginTop:-10}}>
                 (להלן "<b>השוכר</b>")
               </p>
               <p style={{ textDecoration: "underline", textAlign: "left" }}>
@@ -248,7 +289,7 @@ class MainForm extends Component {
                   `}(להלן "<b>המושכר</b>");</p>
             </div>
           </div>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", marginTop:-25 }}>
             <p style={{ marginLeft: 20 }}>והואיל:</p>
             <div style={{ flex: 1 }}>
               <p>{`  ולשוכר ידוע כי ביום תחילתו של חוק הגנת הדייר (נוסח משולב), התשל"ב-1972 ו/או ביום${this.state.signedAtDate ||
@@ -256,7 +297,7 @@ class MainForm extends Component {
                 `}</p>
             </div>
           </div>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", marginTop:-25 }}>
             <p style={{ marginLeft: 20 }}>והואיל:</p>
             <div style={{ flex: 1 }}>
               <p>{`  והמשכיר מעוניין להשכיר לשוכר את המושכר בשכירות בלתי מוגנת, והשוכר מעוניין לשכור מהמשכיר את המושכר בשכירות בלתי מוגנת, והכל בכפוף לתנאי הסכם זה;
@@ -277,7 +318,7 @@ class MainForm extends Component {
               </p>
             </div>
           </div>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", marginTop:-25 }}>
             <p style={{ marginLeft: 20, fontWeight: "bold", textDecoration: "underline"}}>תקופת השכירות</p>
           </div>
           <div style={{ display: "flex" }}>
@@ -288,11 +329,11 @@ class MainForm extends Component {
             this.state.EntranceDate ||"____________"
           } ועד יום ${
             this.state.LeaveDate ||"____________"
-          } `} (להלן: "<b>המושכר</b>").
+          } `} (להלן: "<b>תקופת השכירות</b>").
               </p>
             </div>
           </div>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", marginTop:-25 }}>
             <p style={{ marginLeft: 20}}>2.</p>
             <div style={{ flex: 1 }}>
               <p style={{ textAlign: "justify" }}>
@@ -300,7 +341,7 @@ class MainForm extends Component {
               </p>
             </div>
           </div>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", marginTop:-25 }}>
             <p style={{ marginLeft: 20, fontWeight: "bold", textDecoration: "underline"}}>הצהרות השוכר</p>
           </div>
           <div style={{ display: "flex" }}>
@@ -311,7 +352,7 @@ class MainForm extends Component {
               </p>
             </div>
           </div>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", marginTop:-25 }}>
             <p style={{ marginLeft: 40}}>3.1.</p>
             <div style={{ flex: 1 }}>
               <p>
@@ -319,7 +360,7 @@ class MainForm extends Component {
               </p>
             </div>
           </div>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", marginTop:-25 }}>
             <p style={{ marginLeft: 40}}>3.2.</p>
             <div style={{ flex: 1 }}>
               <p>
@@ -327,19 +368,33 @@ class MainForm extends Component {
               </p>
             </div>
           </div>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", marginTop:-25}}>
             <p style={{ marginLeft: 20}}>4.</p>
             <div style={{ flex: 1 }}>
-              <p>
+              <p >
                 {`השוכר מצהיר כי הוא בדק את המושכר ומצא אותו תקין ובמצב המתאים לצרכי מגוריו בו, וזאת לשביעות רצונו. השוכר מוותר בזאת על כל טענה או תביעה שתהיה לו, אם תהיה, ביחס לאי התאמה במושכר. `} 
               </p>
+              
             </div>
+          </div>
+          <div style={{ display: "flex", marginTop:-25 }}>
+            <p style={{ marginLeft: 20}}>2.</p>
+            <div style={{ flex: 1 }}>
+              <p style={{ textAlign: "justify" }}>
+                {`${this.state.AdditionalSection2} `}
+              </p>
+            </div>
+          </div>
+          <div style={{ display: "flex", marginTop:-25 }}>
+            <p style={{ marginLeft: 20, fontWeight: "bold", textDecoration: "underline"}}>התמורה</p>
           </div>
           <div style={{ display: "flex" }}>
             <p style={{ marginLeft: 20}}>2.</p>
             <div style={{ flex: 1 }}>
               <p style={{ textAlign: "justify" }}>
-                {`${this.state.AdditionalSection2} `}
+                {`בתמורה לקבלת זכות השכירות במושכר, השוכר מתחייב לשלם לידי המשכיר סך של  ${
+            this.state.monthlypayment ||"____________"
+          } מדי ${this.getpaymentday()}  לחודש. `} 
               </p>
             </div>
           </div>
