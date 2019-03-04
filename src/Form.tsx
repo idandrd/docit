@@ -208,7 +208,7 @@ class MainForm extends Component {
               }
             />
           </FormItem>
-          <FormItem text="באיזה יום בחודש ידרש המשכיר לשלם את שכר הדירה / התמורה?">
+          <FormItem text="באיזה יום בחודש ידרש השוכר לשלם את שכר הדירה / התמורה?">
           <select
               style={{ width: 132 }}
               value={this.state.paymentday}
