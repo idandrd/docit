@@ -216,9 +216,9 @@ class MainForm extends Component {
                 this.setState({ paymentday: target.value })
               }
             >
-              <option value="1th">לחודש 1</option>
-              <option value="10th"> לחודש 10</option>
-              <option value="15th">עמותה</option>
+              <option value="1th">ב1 לחודש</option>
+              <option value="10th"> ב10 לחודש</option>
+              <option value="15th">ב15 לחודש</option>
               <option value="otherth">אחר(ידנית)</option>
             </select>
           </FormItem>
@@ -394,7 +394,7 @@ class MainForm extends Component {
               <p style={{ textAlign: "justify" }}>
                 {`בתמורה לקבלת זכות השכירות במושכר, השוכר מתחייב לשלם לידי המשכיר סך של  ${
             this.state.monthlypayment ||"____________"
-          } מדי ${this.getpaymentday() ||"_____"}  לחודש. `} 
+          } מדי ה- ${this.getpaymentday() ||"_____"}  לחודש. `} 
               </p>
             </div>
           </div>
