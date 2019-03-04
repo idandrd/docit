@@ -48,7 +48,7 @@ class MainForm extends Component {
       case "15th":
         return "15";
       case "otherth":
-        return "_______";
+        return "_____";
     }
   };
   
@@ -153,7 +153,7 @@ class MainForm extends Component {
             />
           </FormItem>
           <FormItem text="באיזה קומה המושכר?">
-            <input id="ex2"
+            <input 
               value={this.state.floornumber}
               onChange={({ target }) =>
                 this.setState({ floornumber: target.value })
@@ -394,7 +394,7 @@ class MainForm extends Component {
               <p style={{ textAlign: "justify" }}>
                 {`בתמורה לקבלת זכות השכירות במושכר, השוכר מתחייב לשלם לידי המשכיר סך של  ${
             this.state.monthlypayment ||"____________"
-          } מדי ${this.getpaymentday()}  לחודש. `} 
+          } מדי ${this.getpaymentday() ||"_____"}  לחודש. `} 
               </p>
             </div>
           </div>
