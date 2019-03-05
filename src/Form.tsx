@@ -19,7 +19,8 @@ class MainForm extends Component {
     AdditionalSection1: "",
     AdditionalSection2: "",
     monthlypayment: "",
-    paymentday: ""
+    paymentday: "",
+    paymentmethodo: ""
   };
 
   getlessorIdType = () => {
@@ -49,6 +50,17 @@ class MainForm extends Component {
         return "15";
       case "otherth":
         return "_____";
+    }
+  };
+
+  getpaymentmethodo = () => {
+    const type: "on" | "off" | "ngo" | "partnership" = this.state
+      .paymentmethodo as any;
+    switch (type) {
+      case "on":
+        return " 1111";
+      case "off":
+        return "";
     }
   };
   
@@ -221,6 +233,14 @@ class MainForm extends Component {
               <option value="15th">ב15 לחודש</option>
               <option value="otherth">אחר(ידנית)</option>
             </select>
+          </FormItem>
+          <FormItem text="יום החתימה על ההסכם:">
+            <input
+              type="checkbox"
+              onChange={({ target }) =>
+                this.setState({ paymentmethodo: target.value })
+              }
+            />
           </FormItem>
         </div>
         <div
@@ -398,6 +418,12 @@ class MainForm extends Component {
               </p>
             </div>
           </div>
+            <div style={{ flex: 1 }}>
+              <p >
+              {this.getpaymentmethodo() ||"_____"}
+              </p>
+            </div>
+          
         </div>
       </div>
     );
