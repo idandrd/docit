@@ -58,7 +58,6 @@ class MainForm extends Component {
       .paymentmethodo as any;
     switch (type) {
       case "on":
-        return " 1111";
       case "off":
         return "";
     }
@@ -303,7 +302,7 @@ class MainForm extends Component {
           <div style={{ display: "flex" }}>
             <p style={{ marginLeft: 20 }}>הואיל:</p>
             <div style={{ flex: 1 }}>
-              <p style={{ textAlign: "justify" }}>{`  והמשכיר הוא בעל הזכויות והמחזיק הבלעדי של דירה בת${this.state.roomnuber ||
+              <p style={{ textAlign: "justify" }}>{`והמשכיר הוא בעל הזכויות והמחזיק הבלעדי של דירה בת  ${this.state.roomnuber ||
                 "___"} חדרים, בקומה  ${this.state.floornumber ||
                   "___"}  הנמצאת ב${this.state.apartmentaddress ||"__________________________" } וכן מיטלטלין כאמור ברשימה המצ"ב כנספח א' 
                   `}(להלן "<b>המושכר</b>");</p>
