@@ -58,6 +58,7 @@ class MainForm extends Component {
       .paymentmethodo as any;
     switch (type) {
       case "on":
+        return "kkkk";
       case "off":
         return "";
     }
