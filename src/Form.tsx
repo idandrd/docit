@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { SaveFile } from "./SaveFile";
 
 class MainForm extends Component {
   state = {
@@ -22,6 +23,8 @@ class MainForm extends Component {
     paymentday: "",
     paymentmethodo: ""
   };
+
+  contractElementId = "someRandomId";
 
   getlessorIdType = () => {
     const type: "private" | "company" | "ngo" | "partnership" = this.state
@@ -63,7 +66,7 @@ class MainForm extends Component {
         return "";
     }
   };
-  
+
   render() {
     return (
       <div className="main-form" style={{ display: "flex" }}>
@@ -78,7 +81,7 @@ class MainForm extends Component {
             width: 400
           }}
         >
-          <FormItem  text="היכן נחתם החוזה (עיר/יישוב)?" >
+          <FormItem text="היכן נחתם החוזה (עיר/יישוב)?">
             <input
               value={this.state.signedAtCity}
               onChange={({ target }) =>
@@ -165,7 +168,7 @@ class MainForm extends Component {
             />
           </FormItem>
           <FormItem text="באיזה קומה המושכר?">
-            <input 
+            <input
               value={this.state.floornumber}
               onChange={({ target }) =>
                 this.setState({ floornumber: target.value })
@@ -197,7 +200,7 @@ class MainForm extends Component {
             />
           </FormItem>
           <FormItem text="1הוסף סעיף">
-          <input
+            <input
               value={this.state.AdditionalSection1}
               onChange={({ target }) =>
                 this.setState({ AdditionalSection1: target.value })
@@ -205,7 +208,7 @@ class MainForm extends Component {
             />
           </FormItem>
           <FormItem text="2הוסף סעיף">
-          <input 
+            <input
               value={this.state.AdditionalSection2}
               onChange={({ target }) =>
                 this.setState({ AdditionalSection2: target.value })
@@ -213,7 +216,7 @@ class MainForm extends Component {
             />
           </FormItem>
           <FormItem text="מהו גובה שכר הדירה החודשי הנדרש?">
-          <input 
+            <input
               value={this.state.monthlypayment}
               onChange={({ target }) =>
                 this.setState({ monthlypayment: target.value })
@@ -221,7 +224,7 @@ class MainForm extends Component {
             />
           </FormItem>
           <FormItem text="באיזה יום בחודש ידרש השוכר לשלם את שכר הדירה / התמורה?">
-          <select
+            <select
               style={{ width: 132 }}
               value={this.state.paymentday}
               onChange={({ target }) =>
@@ -242,8 +245,10 @@ class MainForm extends Component {
               }
             />
           </FormItem>
+          <SaveFile elementId={this.contractElementId} />
         </div>
         <div
+          id={this.contractElementId}
           style={{
             margin: 20,
             padding: 20,
@@ -260,22 +265,22 @@ class MainForm extends Component {
           <h2 style={{ textAlign: "center", textDecoration: "underline" }}>
             הסכם שכירות בלתי מוגנת
           </h2>
-          <p style={{ textAlign: "center" }}>{`חוזה שנערך ונחתם ב${this.state
-            .signedAtCity || "______________"} בתאריך ${
-            this.state.signedAtDate || "_____________"
-          }`}
+          <p style={{ textAlign: "center" }}>
+            {`חוזה שנערך ונחתם ב${this.state.signedAtCity ||
+              "______________"} בתאריך ${this.state.signedAtDate ||
+              "_____________"}`}
           </p>
-          
-          <div style={{ display: "flex", }}>
+
+          <div style={{ display: "flex" }}>
             <p style={{ marginLeft: 70, fontWeight: "bold" }}>בין</p>
             <div style={{ flex: 1 }}>
               <p>
                 {`${this.state.lessorName} ${this.getlessorIdType()} ${this
                   .state.lessorId || "________________________"}`}
               </p>
-              <p style={{ marginTop:-10}}>{`מ${this.state.lessorFullAddress ||
+              <p style={{ marginTop: -10 }}>{`מ${this.state.lessorFullAddress ||
                 " __________________________"}`}</p>
-              <p style={{ marginTop:-10}}>
+              <p style={{ marginTop: -10 }}>
                 (להלן "<b>המשכיר</b>")
               </p>
               <p style={{ textDecoration: "underline", textAlign: "left" }}>
@@ -290,9 +295,9 @@ class MainForm extends Component {
                 {`${this.state.lesseeName} ת.ז. ${this.state.lesseeId ||
                   "________________________"}`}
               </p>
-              <p style={{ marginTop:-10}}>{`מ${this.state.lesseeFullAddress ||
+              <p style={{ marginTop: -10 }}>{`מ${this.state.lesseeFullAddress ||
                 " __________________________"}`}</p>
-              <p style={{ marginTop:-10}}>
+              <p style={{ marginTop: -10 }}>
                 (להלן "<b>השוכר</b>")
               </p>
               <p style={{ textDecoration: "underline", textAlign: "left" }}>
@@ -303,21 +308,27 @@ class MainForm extends Component {
           <div style={{ display: "flex" }}>
             <p style={{ marginLeft: 20 }}>הואיל:</p>
             <div style={{ flex: 1 }}>
-              <p style={{ textAlign: "justify" }}>{`והמשכיר הוא בעל הזכויות והמחזיק הבלעדי של דירה בת  ${this.state.roomnuber ||
-                "___"} חדרים, בקומה  ${this.state.floornumber ||
-                  "___"}  הנמצאת ב${this.state.apartmentaddress ||"__________________________" } וכן מיטלטלין כאמור ברשימה המצ"ב כנספח א' 
-                  `}(להלן "<b>המושכר</b>");</p>
+              <p style={{ textAlign: "justify" }}>
+                {`והמשכיר הוא בעל הזכויות והמחזיק הבלעדי של דירה בת  ${this
+                  .state.roomnuber || "___"} חדרים, בקומה  ${this.state
+                  .floornumber || "___"}  הנמצאת ב${this.state
+                  .apartmentaddress ||
+                  "__________________________"} וכן מיטלטלין כאמור ברשימה המצ"ב כנספח א' 
+                  `}
+                (להלן "<b>המושכר</b>");
+              </p>
             </div>
           </div>
-          <div style={{ display: "flex", marginTop:-25 }}>
+          <div style={{ display: "flex", marginTop: -25 }}>
             <p style={{ marginLeft: 20 }}>והואיל:</p>
             <div style={{ flex: 1 }}>
-              <p>{`  ולשוכר ידוע כי ביום תחילתו של חוק הגנת הדייר (נוסח משולב), התשל"ב-1972 ו/או ביום${this.state.signedAtDate ||
+              <p>{`  ולשוכר ידוע כי ביום תחילתו של חוק הגנת הדייר (נוסח משולב), התשל"ב-1972 ו/או ביום${this
+                .state.signedAtDate ||
                 "___"} ולאחר מכן היה המושכר פנוי ולא היה דייר שהיה זכאי להחזיק בו, וכי לא יחולו ביחס למושכר הוראות חוק הגנת הדייר ו/או כל הוראות הבאות להגביל את השכירות;
                 `}</p>
             </div>
           </div>
-          <div style={{ display: "flex", marginTop:-25 }}>
+          <div style={{ display: "flex", marginTop: -25 }}>
             <p style={{ marginLeft: 20 }}>והואיל:</p>
             <div style={{ flex: 1 }}>
               <p>{`  והמשכיר מעוניין להשכיר לשוכר את המושכר בשכירות בלתי מוגנת, והשוכר מעוניין לשכור מהמשכיר את המושכר בשכירות בלתי מוגנת, והכל בכפוף לתנאי הסכם זה;
@@ -326,104 +337,134 @@ class MainForm extends Component {
           </div>
           <div style={{ display: "flex" }}>
             <div style={{ flex: 1 }}>
-          <p style={{ textAlign: "center", fontWeight: "bold" }}>{`ולפיכך הוסכם והותנה בין הצדדים כדלקמן:`}</p>
-          <p style={{ marginLeft: 70, fontWeight: "bold", textDecoration: "underline" }}>מבוא</p>
+              <p
+                style={{ textAlign: "center", fontWeight: "bold" }}
+              >{`ולפיכך הוסכם והותנה בין הצדדים כדלקמן:`}</p>
+              <p
+                style={{
+                  marginLeft: 70,
+                  fontWeight: "bold",
+                  textDecoration: "underline"
+                }}
+              >
+                מבוא
+              </p>
             </div>
           </div>
           <div style={{ display: "flex" }}>
-            <p style={{ marginLeft: 20}}>1.</p>
+            <p style={{ marginLeft: 20 }}>1.</p>
             <div style={{ flex: 1 }}>
               <p>
                 {`המבוא להסכם זה מהווה חלק בלתי נפרד הימנו. אין לפרש הוראה מהוראותיו בניגוד למשמעות הטבעית והרגילה של מילות הסכם זה.`}
               </p>
             </div>
           </div>
-          <div style={{ display: "flex", marginTop:-25 }}>
-            <p style={{ marginLeft: 20, fontWeight: "bold", textDecoration: "underline"}}>תקופת השכירות</p>
+          <div style={{ display: "flex", marginTop: -25 }}>
+            <p
+              style={{
+                marginLeft: 20,
+                fontWeight: "bold",
+                textDecoration: "underline"
+              }}
+            >
+              תקופת השכירות
+            </p>
           </div>
           <div style={{ display: "flex" }}>
-            <p style={{ marginLeft: 20}}>2.</p>
+            <p style={{ marginLeft: 20 }}>2.</p>
             <div style={{ flex: 1 }}>
               <p style={{ textAlign: "justify" }}>
-                {`המשכיר משכיר בזאת את המושכר בשכירות בלתי מוגנת לשוכר, והשוכר שוכר בזאת את המושכר בשכירות בלתי מוגנת לתקופה בת(יציג את התאריך בין 2 התאריכים שהוזנו) חודשים החל מיום ${
-            this.state.EntranceDate ||"____________"
-          } ועד יום ${
-            this.state.LeaveDate ||"____________"
-          } `} (להלן: "<b>תקופת השכירות</b>").
+                {`המשכיר משכיר בזאת את המושכר בשכירות בלתי מוגנת לשוכר, והשוכר שוכר בזאת את המושכר בשכירות בלתי מוגנת לתקופה בת(יציג את התאריך בין 2 התאריכים שהוזנו) חודשים החל מיום ${this
+                  .state.EntranceDate || "____________"} ועד יום ${this.state
+                  .LeaveDate || "____________"} `}{" "}
+                (להלן: "<b>תקופת השכירות</b>").
               </p>
             </div>
           </div>
-          <div style={{ display: "flex", marginTop:-25 }}>
-            <p style={{ marginLeft: 20}}>2.</p>
+          <div style={{ display: "flex", marginTop: -25 }}>
+            <p style={{ marginLeft: 20 }}>2.</p>
             <div style={{ flex: 1 }}>
               <p style={{ textAlign: "justify" }}>
                 {`${this.state.AdditionalSection1} `}
               </p>
             </div>
           </div>
-          <div style={{ display: "flex", marginTop:-25 }}>
-            <p style={{ marginLeft: 20, fontWeight: "bold", textDecoration: "underline"}}>הצהרות השוכר</p>
+          <div style={{ display: "flex", marginTop: -25 }}>
+            <p
+              style={{
+                marginLeft: 20,
+                fontWeight: "bold",
+                textDecoration: "underline"
+              }}
+            >
+              הצהרות השוכר
+            </p>
           </div>
           <div style={{ display: "flex" }}>
-            <p style={{ marginLeft: 20}}>3.</p>
+            <p style={{ marginLeft: 20 }}>3.</p>
             <div style={{ flex: 1 }}>
               <p>
-                {` השוכר מצהיר בזאת כי ידוע לו והוא מסכים לקבל את המושכר בשכירות בלתי מוגנת, וזאת בכפוף לאמור להלן: `} 
+                {` השוכר מצהיר בזאת כי ידוע לו והוא מסכים לקבל את המושכר בשכירות בלתי מוגנת, וזאת בכפוף לאמור להלן: `}
               </p>
             </div>
           </div>
-          <div style={{ display: "flex", marginTop:-25 }}>
-            <p style={{ marginLeft: 40}}>3.1.</p>
+          <div style={{ display: "flex", marginTop: -25 }}>
+            <p style={{ marginLeft: 40 }}>3.1.</p>
             <div style={{ flex: 1 }}>
               <p>
-                {` השוכר אינו ולא יהיה דייר מוגן לפי חוק הגנת הדייר (נוסח משולב), התשל"ב-1972 ולא לפי כל חוק או דין אחר; לא תחול עליו כל הגנה מכל סוג ומין שהוא וכל הגנה מההגנות הקנויות לדייר מוגן.  `} 
+                {` השוכר אינו ולא יהיה דייר מוגן לפי חוק הגנת הדייר (נוסח משולב), התשל"ב-1972 ולא לפי כל חוק או דין אחר; לא תחול עליו כל הגנה מכל סוג ומין שהוא וכל הגנה מההגנות הקנויות לדייר מוגן.  `}
               </p>
             </div>
           </div>
-          <div style={{ display: "flex", marginTop:-25 }}>
-            <p style={{ marginLeft: 40}}>3.2.</p>
+          <div style={{ display: "flex", marginTop: -25 }}>
+            <p style={{ marginLeft: 40 }}>3.2.</p>
             <div style={{ flex: 1 }}>
               <p>
-                {`השוכר לא שילם כל דמי מפתח שהם בתמורה לזכות השכירות במושכר ו/או כל תוספת אחרת למעט דמי השכירות הנקובים בהסכם זה.  `} 
+                {`השוכר לא שילם כל דמי מפתח שהם בתמורה לזכות השכירות במושכר ו/או כל תוספת אחרת למעט דמי השכירות הנקובים בהסכם זה.  `}
               </p>
             </div>
           </div>
-          <div style={{ display: "flex", marginTop:-25}}>
-            <p style={{ marginLeft: 20}}>4.</p>
+          <div style={{ display: "flex", marginTop: -25 }}>
+            <p style={{ marginLeft: 20 }}>4.</p>
             <div style={{ flex: 1 }}>
-              <p >
-                {`השוכר מצהיר כי הוא בדק את המושכר ומצא אותו תקין ובמצב המתאים לצרכי מגוריו בו, וזאת לשביעות רצונו. השוכר מוותר בזאת על כל טענה או תביעה שתהיה לו, אם תהיה, ביחס לאי התאמה במושכר. `} 
+              <p>
+                {`השוכר מצהיר כי הוא בדק את המושכר ומצא אותו תקין ובמצב המתאים לצרכי מגוריו בו, וזאת לשביעות רצונו. השוכר מוותר בזאת על כל טענה או תביעה שתהיה לו, אם תהיה, ביחס לאי התאמה במושכר. `}
               </p>
-              
             </div>
           </div>
-          <div style={{ display: "flex", marginTop:-25 }}>
-            <p style={{ marginLeft: 20}}>2.</p>
+          <div style={{ display: "flex", marginTop: -25 }}>
+            <p style={{ marginLeft: 20 }}>2.</p>
             <div style={{ flex: 1 }}>
               <p style={{ textAlign: "justify" }}>
                 {`${this.state.AdditionalSection2} `}
               </p>
             </div>
           </div>
-          <div style={{ display: "flex", marginTop:-25 }}>
-            <p style={{ marginLeft: 20, fontWeight: "bold", textDecoration: "underline"}}>התמורה</p>
+          <div style={{ display: "flex", marginTop: -25 }}>
+            <p
+              style={{
+                marginLeft: 20,
+                fontWeight: "bold",
+                textDecoration: "underline"
+              }}
+            >
+              התמורה
+            </p>
           </div>
           <div style={{ display: "flex" }}>
-            <p style={{ marginLeft: 20}}>2.</p>
+            <p style={{ marginLeft: 20 }}>2.</p>
             <div style={{ flex: 1 }}>
               <p style={{ textAlign: "justify" }}>
-                {`בתמורה לקבלת זכות השכירות במושכר, השוכר מתחייב לשלם לידי המשכיר סך של  ${
-            this.state.monthlypayment ||"____________"
-          } מדי ה- ${this.getpaymentday() ||"_____"}  לחודש. `} 
+                {`בתמורה לקבלת זכות השכירות במושכר, השוכר מתחייב לשלם לידי המשכיר סך של  ${this
+                  .state.monthlypayment ||
+                  "____________"} מדי ה- ${this.getpaymentday() ||
+                  "_____"}  לחודש. `}
               </p>
             </div>
           </div>
-            <div style={{ flex: 1 }}>
-              <p >
-              {this.getpaymentmethodo() ||"_____"}
-              </p>
-            </div>
-          
+          <div style={{ flex: 1 }}>
+            <p>{this.getpaymentmethodo() || "_____"}</p>
+          </div>
         </div>
       </div>
     );
