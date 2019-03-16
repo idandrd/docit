@@ -3,6 +3,7 @@ import { SaveFile } from "./SaveFile";
 
 class MainForm extends Component {
   state = {
+    show: false,
     signedAtCity: "",
     signedAtDate: "",
     lessorName: "",
@@ -240,11 +241,17 @@ class MainForm extends Component {
           <FormItem text="יום החתימה על ההסכם:">
             <input
               type="checkbox"
-              onChange={({ target }) =>
-                this.setState({ paymentmethodo: target.value })
-              }
+              onChange={() => this.setState({ show: !this.state.show })}
             />
           </FormItem>
+          {this.state.show && (
+            <FormItem text="I'm here!!!">
+              <input
+                type="checkbox"
+                onChange={() => this.setState({ show: !this.state.show })}
+              />
+            </FormItem>
+          )}
           <SaveFile elementId={this.contractElementId} />
         </div>
         <div
