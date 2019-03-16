@@ -262,9 +262,9 @@ class MainForm extends Component {
             color: "black"
           }}
         >
-          <h2 style={{ textAlign: "center", textDecoration: "underline" }}>
+          <h1 style={{ textAlign: "center", textDecoration: "underline" }}>
             הסכם שכירות בלתי מוגנת
-          </h2>
+          </h1>
           <p style={{ textAlign: "center" }}>
             {`חוזה שנערך ונחתם ב${this.state.signedAtCity ||
               "______________"} בתאריך ${this.state.signedAtDate ||
@@ -340,131 +340,110 @@ class MainForm extends Component {
               <p
                 style={{ textAlign: "center", fontWeight: "bold" }}
               >{`ולפיכך הוסכם והותנה בין הצדדים כדלקמן:`}</p>
-              <p
-                style={{
-                  marginLeft: 70,
-                  fontWeight: "bold",
-                  textDecoration: "underline"
-                }}
-              >
-                מבוא
-              </p>
             </div>
           </div>
-          <div style={{ display: "flex" }}>
-            <p style={{ marginLeft: 20 }}>1.</p>
-            <div style={{ flex: 1 }}>
-              <p>
-                {`המבוא להסכם זה מהווה חלק בלתי נפרד הימנו. אין לפרש הוראה מהוראותיו בניגוד למשמעות הטבעית והרגילה של מילות הסכם זה.`}
-              </p>
-            </div>
-          </div>
-          <div style={{ display: "flex", marginTop: -25 }}>
-            <p
+          <ol>
+            <h3
               style={{
-                marginLeft: 20,
-                fontWeight: "bold",
+                marginRight: -30,
+                textDecoration: "underline"
+              }}
+            >
+              מבוא
+            </h3>
+            <li>
+              {`המבוא להסכם זה מהווה חלק בלתי נפרד הימנו. אין לפרש הוראה מהוראותיו בניגוד למשמעות הטבעית והרגילה של מילות הסכם זה.`}
+            </li>
+            <h3
+              style={{
+                marginRight: -30,
                 textDecoration: "underline"
               }}
             >
               תקופת השכירות
-            </p>
-          </div>
-          <div style={{ display: "flex" }}>
-            <p style={{ marginLeft: 20 }}>2.</p>
-            <div style={{ flex: 1 }}>
-              <p style={{ textAlign: "justify" }}>
-                {`המשכיר משכיר בזאת את המושכר בשכירות בלתי מוגנת לשוכר, והשוכר שוכר בזאת את המושכר בשכירות בלתי מוגנת לתקופה בת(יציג את התאריך בין 2 התאריכים שהוזנו) חודשים החל מיום ${this
-                  .state.EntranceDate || "____________"} ועד יום ${this.state
-                  .LeaveDate || "____________"} `}{" "}
-                (להלן: "<b>תקופת השכירות</b>").
+            </h3>
+            <li style={{ textAlign: "justify" }}>
+              {`המשכיר משכיר בזאת את המושכר בשכירות בלתי מוגנת לשוכר, והשוכר שוכר בזאת את המושכר בשכירות בלתי מוגנת לתקופה בת(יציג את התאריך בין 2 התאריכים שהוזנו) חודשים החל מיום ${this
+                .state.EntranceDate || "____________"} ועד יום ${this.state
+                .LeaveDate || "____________"} `}{" "}
+              (להלן: "<b>תקופת השכירות</b>").
+            </li>
+            <div>
+              <div style={{ flex: 1 }}>
+                <p style={{ textAlign: "justify" }}>
+                  {`${this.state.AdditionalSection1} `}
+                </p>
+              </div>
+            </div>
+            <div style={{ display: "flex", marginTop: -25 }}>
+              <p
+                style={{
+                  marginLeft: 20,
+                  fontWeight: "bold",
+                  textDecoration: "underline"
+                }}
+              >
+                הצהרות השוכר
               </p>
             </div>
-          </div>
-          <div style={{ display: "flex", marginTop: -25 }}>
-            <p style={{ marginLeft: 20 }}>2.</p>
-            <div style={{ flex: 1 }}>
-              <p style={{ textAlign: "justify" }}>
-                {`${this.state.AdditionalSection1} `}
+            <li>
+              {` השוכר מצהיר בזאת כי ידוע לו והוא מסכים לקבל את המושכר בשכירות בלתי מוגנת, וזאת בכפוף לאמור להלן: `}
+              <ol type="i">
+                <li>
+                  {` השוכר אינו ולא יהיה דייר מוגן לפי חוק הגנת הדייר (נוסח משולב), התשל"ב-1972 ולא לפי כל חוק או דין אחר; לא תחול עליו כל הגנה מכל סוג ומין שהוא וכל הגנה מההגנות הקנויות לדייר מוגן.  `}
+                </li>
+              </ol>
+            </li>
+            <div>
+              <p style={{ marginLeft: 40 }}>3.2.</p>
+              <div style={{ flex: 1 }}>
+                <p>
+                  {`השוכר לא שילם כל דמי מפתח שהם בתמורה לזכות השכירות במושכר ו/או כל תוספת אחרת למעט דמי השכירות הנקובים בהסכם זה.  `}
+                </p>
+              </div>
+            </div>
+            <div style={{ display: "flex", marginTop: -25 }}>
+              <p style={{ marginLeft: 20 }}>4.</p>
+              <div style={{ flex: 1 }}>
+                <p>
+                  {`השוכר מצהיר כי הוא בדק את המושכר ומצא אותו תקין ובמצב המתאים לצרכי מגוריו בו, וזאת לשביעות רצונו. השוכר מוותר בזאת על כל טענה או תביעה שתהיה לו, אם תהיה, ביחס לאי התאמה במושכר. `}
+                </p>
+              </div>
+            </div>
+            <div style={{ display: "flex", marginTop: -25 }}>
+              <p style={{ marginLeft: 20 }}>2.</p>
+              <div style={{ flex: 1 }}>
+                <p style={{ textAlign: "justify" }}>
+                  {`${this.state.AdditionalSection2} `}
+                </p>
+              </div>
+            </div>
+            <div style={{ display: "flex", marginTop: -25 }}>
+              <p
+                style={{
+                  marginLeft: 20,
+                  fontWeight: "bold",
+                  textDecoration: "underline"
+                }}
+              >
+                התמורה
               </p>
             </div>
-          </div>
-          <div style={{ display: "flex", marginTop: -25 }}>
-            <p
-              style={{
-                marginLeft: 20,
-                fontWeight: "bold",
-                textDecoration: "underline"
-              }}
-            >
-              הצהרות השוכר
-            </p>
-          </div>
-          <div style={{ display: "flex" }}>
-            <p style={{ marginLeft: 20 }}>3.</p>
-            <div style={{ flex: 1 }}>
-              <p>
-                {` השוכר מצהיר בזאת כי ידוע לו והוא מסכים לקבל את המושכר בשכירות בלתי מוגנת, וזאת בכפוף לאמור להלן: `}
-              </p>
+            <div style={{ display: "flex" }}>
+              <p style={{ marginLeft: 20 }}>2.</p>
+              <div style={{ flex: 1 }}>
+                <p style={{ textAlign: "justify" }}>
+                  {`בתמורה לקבלת זכות השכירות במושכר, השוכר מתחייב לשלם לידי המשכיר סך של  ${this
+                    .state.monthlypayment ||
+                    "____________"} מדי ה- ${this.getpaymentday() ||
+                    "_____"}  לחודש. `}
+                </p>
+              </div>
             </div>
-          </div>
-          <div style={{ display: "flex", marginTop: -25 }}>
-            <p style={{ marginLeft: 40 }}>3.1.</p>
             <div style={{ flex: 1 }}>
-              <p>
-                {` השוכר אינו ולא יהיה דייר מוגן לפי חוק הגנת הדייר (נוסח משולב), התשל"ב-1972 ולא לפי כל חוק או דין אחר; לא תחול עליו כל הגנה מכל סוג ומין שהוא וכל הגנה מההגנות הקנויות לדייר מוגן.  `}
-              </p>
+              <p>{this.getpaymentmethodo() || "_____"}</p>
             </div>
-          </div>
-          <div style={{ display: "flex", marginTop: -25 }}>
-            <p style={{ marginLeft: 40 }}>3.2.</p>
-            <div style={{ flex: 1 }}>
-              <p>
-                {`השוכר לא שילם כל דמי מפתח שהם בתמורה לזכות השכירות במושכר ו/או כל תוספת אחרת למעט דמי השכירות הנקובים בהסכם זה.  `}
-              </p>
-            </div>
-          </div>
-          <div style={{ display: "flex", marginTop: -25 }}>
-            <p style={{ marginLeft: 20 }}>4.</p>
-            <div style={{ flex: 1 }}>
-              <p>
-                {`השוכר מצהיר כי הוא בדק את המושכר ומצא אותו תקין ובמצב המתאים לצרכי מגוריו בו, וזאת לשביעות רצונו. השוכר מוותר בזאת על כל טענה או תביעה שתהיה לו, אם תהיה, ביחס לאי התאמה במושכר. `}
-              </p>
-            </div>
-          </div>
-          <div style={{ display: "flex", marginTop: -25 }}>
-            <p style={{ marginLeft: 20 }}>2.</p>
-            <div style={{ flex: 1 }}>
-              <p style={{ textAlign: "justify" }}>
-                {`${this.state.AdditionalSection2} `}
-              </p>
-            </div>
-          </div>
-          <div style={{ display: "flex", marginTop: -25 }}>
-            <p
-              style={{
-                marginLeft: 20,
-                fontWeight: "bold",
-                textDecoration: "underline"
-              }}
-            >
-              התמורה
-            </p>
-          </div>
-          <div style={{ display: "flex" }}>
-            <p style={{ marginLeft: 20 }}>2.</p>
-            <div style={{ flex: 1 }}>
-              <p style={{ textAlign: "justify" }}>
-                {`בתמורה לקבלת זכות השכירות במושכר, השוכר מתחייב לשלם לידי המשכיר סך של  ${this
-                  .state.monthlypayment ||
-                  "____________"} מדי ה- ${this.getpaymentday() ||
-                  "_____"}  לחודש. `}
-              </p>
-            </div>
-          </div>
-          <div style={{ flex: 1 }}>
-            <p>{this.getpaymentmethodo() || "_____"}</p>
-          </div>
+          </ol>
         </div>
       </div>
     );
