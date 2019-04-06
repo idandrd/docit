@@ -13,10 +13,12 @@ const TabPane = Tabs.TabPane;
 
 class MainForm extends Component {
   state = {
-    currentTab: "1",
+    currentTab: "-1",
     show: false,
     show1: false,
     show2: false,
+    showOptionpPriod: false,
+    OptionPeriod: "",
     signedAtCity: "",
     signedAtDate: "",
     lessorName: "",
@@ -34,6 +36,7 @@ class MainForm extends Component {
     apartmentaddress: "",
     EntranceDate: "",
     LeaveDate: "",
+    OptionPeriodDay: "",
     AdditionalSection1: "",
     AdditionalSection2: "",
     monthlypayment: "",
@@ -114,12 +117,70 @@ class MainForm extends Component {
             backgroundColor: "#666666"
           }}
         >
+        
           <Tabs
             tabPosition="right"
             activeKey={this.state.currentTab}
             onChange={this.handleTabChange}
           >
-            <TabPane tab="פרטים כלליים" key="1">
+          <TabPane tab=" הנחיות" key="-1">
+          <h1 style={{ textAlign: "center" }}>
+            {`ברוכים הבאים למחולל הסכמי השכירות הבלתי מוגנים `}
+          </h1>
+          <p style={{ textAlign: "right" }}>
+            {`הכנת הסכם שכירות בלתי מוגן, קל מתמיד, המרכיבים ליצור את הסכם השכירות הבלתי מוגן כבר נמצאים כאן(!) כל שעליכם לעשות זה לענות על כמה שאלות פשוטות, לבחור איזה סעיפים יכנסו לחוזה ואיזה לא ובום יש לכם חהסכם שכירות סטנדרטי מתואם במיוחד בשבילכם `}
+          </p>
+          <p style={{ textAlign: "right" }}>
+            {`*אגב בצד שמאל אתם יכולים לראות את ההסכם שלכם `}
+          </p>
+          <div style={{ display: "flex", justifyContent: "center"}}>
+              <Button type="primary" 
+              style={{ width: 300 }}
+              size="large"
+              onClick={() => this.handleTabChange("0")}>
+                חולל:)
+              </Button>
+          </div>
+          </TabPane>
+            <TabPane tab="הרחבות חוזה" key="0" style={{  justifyContent: "center", alignContent: "center"}}>
+            <div style={{ display: "flex", justifyContent: "center"}}>
+            <img src="animals.png" alt="Italian Trulli" style={{ display: "flex", width: 200, height: 145, border: "solid",
+            borderRadius: 20, color: "white", margin: 5}}></img>
+            <img src="partners.png" alt="Italian Trulli" style={{ display: "flex", width: 200, height: 145, border: "solid",
+            borderRadius: 20, color: "white", margin: 5}}></img>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center"}}>
+            <img src="smoking.png" alt="Italian Trulli" style={{ display: "flex", width: 200, height: 145, border: "solid",
+            borderRadius: 20, color: "white", margin: 5}}></img>
+            <Button 
+            
+            onClick={() =>  this.setState({ showOptionpPriod: !this.state.showOptionpPriod })}  style={{ justifyContent: "center", width: 200, height: 145, border: "solid",
+            borderRadius: 20, color: "white", margin: 5,} }>
+            <img src="option-period.png" alt="Italian Trulli" style={{width: 150, height: 135, color: "white"}}></img>
+            </Button>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center"}}>
+            <img src="yard.png" alt="Italian Trulli" style={{ display: "flex", width: 200, height: 145, border: "solid",
+            borderRadius: 20, color: "white", margin: 5}}></img>
+            <img src="pool.png" alt="Italian Trulli" style={{ display: "flex", width: 200, height: 145, border: "solid",
+            borderRadius: 20, color: "white", margin: 5}}></img>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center"}}>
+            <img src="insurance.png" alt="Italian Trulli" style={{ display: "flex", width: 200, height: 145, border: "solid",
+            borderRadius: 20, color: "white", margin: 5}}></img>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center"}}>
+            <Button type="primary" onClick={() => this.handleTabChange("-1")} style={{ justifyContent: "center"}}>
+                <Icon type="right" />
+                הקודם
+              </Button>
+              <Button type="primary" onClick={() => this.handleTabChange("1")}>
+                הבא
+                <Icon type="left" />
+              </Button>
+              </div>
+            </TabPane>
+            <TabPane tab="פרטי הצדדים לעסקה " key="1">
               <FormItem text="היכן נחתם החוזה (עיר/יישוב)?">
                 <Input
                   value={this.state.signedAtCity}
@@ -248,7 +309,33 @@ class MainForm extends Component {
                 <Icon type="left" />
               </Button>
             </TabPane>
-            <TabPane tab="בעלי חיים" key="2">
+            {this.state.showOptionpPriod && (
+            <TabPane tab=" תקותאופציה" key="2">
+              <FormItem text="באיזה יום בחודש ידרש השוכר לשלם את שכר הדירה / התמורה?">
+                <select
+                  style={{ width: 132 }}
+                  value={this.state.OptionPeriodDay}
+                  onChange={({ target }) =>
+                    this.setState({ OptionPeriodDay: target.value })
+                  }
+                >
+                  <option value="15 ימים">15 ימים</option>
+                  <option value="חודש"> חודש</option>
+                  <option value="חודשיים">חודשיים</option>
+                  <option value="שלושה חודשים">שלושה חודשים</option>
+                </select>
+              </FormItem>
+              <FormItem text=" מהי תקופת האופציה הניתנת לשוכר(בחודשים): ">
+                <Input
+                  value={this.state.OptionPeriod}
+                  onChange={({ target }) =>
+                    this.setState({ OptionPeriod: target.value })
+                  }
+                />
+              </FormItem>
+            </TabPane>
+            )}
+            <TabPane tab="בעלי חיים" key="3">
               <FormItem text="1הוסף סעיף">
                 <Input
                   value={this.state.AdditionalSection1}
@@ -303,7 +390,7 @@ class MainForm extends Component {
               )}
               <SaveFile elementId={this.contractElementId} />
             </TabPane>
-            <TabPane tab="גינה" key="3">
+            <TabPane tab="חצר" key="4">
               Idan
             </TabPane>
           </Tabs>
@@ -455,6 +542,14 @@ class MainForm extends Component {
                 .LeaveDate || "____________"} `}{" "}
               (להלן: "<b>תקופת השכירות</b>").
             </li>
+            {this.state.showOptionpPriod && (
+              <li style={{ textAlign: "justify" }}>
+              {`היה והשוכר החליט כי ברצונו להאריך את תקופת השכירות, והמשכיר הסכים על ההארכה בהודעה בכתב עד ${this
+                .state.OptionPeriodDay || "____________"} , תקופה זו תעמוד על ${this.state
+                .OptionPeriod || "____________"} `}{" "}
+              (להלן: "<b>תקופת האופציה</b>").
+              </li>
+            )}
             {this.state.show1 && (
               <li style={{ textAlign: "justify" }}>
                 {this.state.AdditionalSection1}
