@@ -90,8 +90,7 @@ class MainForm extends Component {
   handleTabChange = (tabKey: string) => {
     this.setState({ currentTab: tabKey });
     scroller.scrollTo(`section${tabKey}`, {
-      duration: 1500,
-      delay: 100,
+      duration: 1000,
       smooth: true,
       containerId: this.contractElementId,
       offset: -30
@@ -105,11 +104,13 @@ class MainForm extends Component {
           style={{
             margin: 20,
             padding: 20,
+            paddingRight: 0,
             border: "solid",
             borderRadius: 20,
             textAlign: "right",
             fontSize: 20,
             width: 600,
+            height: 700,
             backgroundColor: "#666666"
           }}
         >
@@ -321,7 +322,7 @@ class MainForm extends Component {
             borderRadius: 20,
             color: "black",
             overflow: "scroll",
-            height: 500
+            height: 700
           }}
         >
           <Element name="section1">
