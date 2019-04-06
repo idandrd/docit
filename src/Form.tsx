@@ -1,5 +1,13 @@
 import React, { Component } from "react";
 import { SaveFile } from "./SaveFile";
+import {
+  Link,
+  Element,
+  Events,
+  scrollSpy,
+  scroller,
+  animateScroll
+} from "react-scroll";
 import { Tabs, Input, Button, Icon } from "antd";
 const TabPane = Tabs.TabPane;
 
@@ -33,7 +41,7 @@ class MainForm extends Component {
     paymentmethodo: "",
     showerace1: false,
     erace1: true,
-    showerace2: "",
+    showerace2: ""
   };
 
   contractElementId = "someRandomId";
@@ -79,6 +87,17 @@ class MainForm extends Component {
     }
   };
 
+  handleTabChange = (tabKey: string) => {
+    this.setState({ currentTab: tabKey });
+    scroller.scrollTo(`section${tabKey}`, {
+      duration: 1500,
+      delay: 100,
+      smooth: true,
+      containerId: this.contractElementId,
+      offset: -30
+    });
+  };
+
   render() {
     return (
       <div className="main-form" style={{ display: "flex" }}>
@@ -97,7 +116,7 @@ class MainForm extends Component {
           <Tabs
             tabPosition="right"
             activeKey={this.state.currentTab}
-            onChange={key => this.setState({ currentTab: key })}
+            onChange={this.handleTabChange}
           >
             <TabPane tab="פרטים כלליים" key="1">
               <FormItem text="היכן נחתם החוזה (עיר/יישוב)?">
@@ -223,10 +242,7 @@ class MainForm extends Component {
                 <Icon type="right" />
                 הקודם
               </Button>
-              <Button
-                type="primary"
-                onClick={() => this.setState({ currentTab: "2" })}
-              >
+              <Button type="primary" onClick={() => this.handleTabChange("2")}>
                 הבא
                 <Icon type="left" />
               </Button>
@@ -308,21 +324,22 @@ class MainForm extends Component {
             height: 500
           }}
         >
-          <h1 style={{ textAlign: "center", textDecoration: "underline" }}>
-            הסכם שכירות בלתי מוגנת
-          </h1>
+          <Element name="section1">
+            <h1 style={{ textAlign: "center", textDecoration: "underline" }}>
+              הסכם שכירות בלתי מוגנת
+            </h1>
+          </Element>
           <p style={{ textAlign: "center" }}>
             {`חוזה שנערך ונחתם ב${this.state.signedAtCity ||
               "______________"} בתאריך ${this.state.signedAtDate ||
               "_____________"}`}
           </p>
 
-
-            <div style={{ display: "flex" }}>
+          <div style={{ display: "flex" }}>
             <p style={{ marginLeft: 70, fontWeight: "bold" }}>בין</p>
 
             <div style={{ flex: 1 }}>
-              <p style={{ fontWeight: "bold"}}>
+              <p style={{ fontWeight: "bold" }}>
                 {`${this.state.lessorName} ${this.getlessorIdType()} ${this
                   .state.lessorId || "________________________"}`}
               </p>
@@ -335,24 +352,25 @@ class MainForm extends Component {
                 מצד אחד
               </p>
             </div>
-            </div>
+          </div>
           <div style={{ display: "flex" }}>
             <p style={{ marginLeft: 70, fontWeight: "bold" }}>לבין</p>
             <div style={{ flex: 1 }}>
-              <p style={{ fontWeight: "bold"}}>
+              <p style={{ fontWeight: "bold" }}>
                 {`${this.state.lesseeName} ת.ז. ${this.state.lesseeId ||
                   "________________________"}`}
               </p>
-              { this.state.showadditionallessee && (
-              <p style={{ fontWeight: "bold"}}>
-                {`${this.state.lesseeName1} ת.ז. ${this.state.lesseeId1 ||
-                  "________________________"}`}
-              </p>
+              {this.state.showadditionallessee && (
+                <p style={{ fontWeight: "bold" }}>
+                  {`${this.state.lesseeName1} ת.ז. ${this.state.lesseeId1 ||
+                    "________________________"}`}
+                </p>
               )}
               <p style={{ marginTop: -10 }}>{`מ${this.state.lesseeFullAddress ||
                 " __________________________"}`}</p>
               <p style={{ marginTop: -10 }}>
-                ( להלן {this.state.showadditionallessee && ('ביחד ולחוד')} "<b>השוכר</b>")
+                ( להלן {this.state.showadditionallessee && "ביחד ולחוד"} "
+                <b>השוכר</b>")
               </p>
               <p style={{ textDecoration: "underline", textAlign: "left" }}>
                 מצד שני
@@ -391,26 +409,36 @@ class MainForm extends Component {
           </div>
 
           <ol>
-          <p
-                style={{ textAlign: "center", fontWeight: "bold" }}
-              >{`ולפיכך הוסכם והותנה בין הצדדים כדלקמן:`}</p>
-            <h3
-              style={{
-                marginRight: -30,
-                textDecoration: "underline"
-              }}
-            >
-              מבוא
-            </h3>
-            <div style={{ display: "flex"}}>
-            {this.state.erace1 && ( 
-           <li onMouseOver={() => this.setState({ showerace1: !this.state.showerace1 })} >
-              {`המבוא להסכם זה מהווה חלק בלתי נפרד הימנו. אין לפרש הוראה מהוראותיו בניגוד למשמעות הטבעית והרגילה של מילות הסכם זה.`}
-            </li>)}
-            {this.state.erace1 && ( 
-            <p 
-            onClick={() => this.setState({ erace1: !this.state.erace1 })} >{this.state.showerace1 && ('X')}</p>
-            )}
+            <p
+              style={{ textAlign: "center", fontWeight: "bold" }}
+            >{`ולפיכך הוסכם והותנה בין הצדדים כדלקמן:`}</p>
+            <Element name="section2">
+              <h3
+                style={{
+                  marginRight: -30,
+                  textDecoration: "underline"
+                }}
+              >
+                מבוא
+              </h3>
+            </Element>
+            <div style={{ display: "flex" }}>
+              {this.state.erace1 && (
+                <li
+                  onMouseOver={() =>
+                    this.setState({ showerace1: !this.state.showerace1 })
+                  }
+                >
+                  {`המבוא להסכם זה מהווה חלק בלתי נפרד הימנו. אין לפרש הוראה מהוראותיו בניגוד למשמעות הטבעית והרגילה של מילות הסכם זה.`}
+                </li>
+              )}
+              {this.state.erace1 && (
+                <p
+                  onClick={() => this.setState({ erace1: !this.state.erace1 })}
+                >
+                  {this.state.showerace1 && "X"}
+                </p>
+              )}
             </div>
             <h3
               style={{
@@ -427,10 +455,10 @@ class MainForm extends Component {
               (להלן: "<b>תקופת השכירות</b>").
             </li>
             {this.state.show1 && (
-            <li style={{ textAlign: "justify" }}>
-            {this.state.AdditionalSection1}
-            </li>
-          )}
+              <li style={{ textAlign: "justify" }}>
+                {this.state.AdditionalSection1}
+              </li>
+            )}
             <h3
               style={{
                 marginRight: -30,
@@ -446,19 +474,18 @@ class MainForm extends Component {
                   {` השוכר אינו ולא יהיה דייר מוגן לפי חוק הגנת הדייר (נוסח משולב), התשל"ב-1972 ולא לפי כל חוק או דין אחר; לא תחול עליו כל הגנה מכל סוג ומין שהוא וכל הגנה מההגנות הקנויות לדייר מוגן.  `}
                 </li>
                 <li>
-                {`השוכר לא שילם כל דמי מפתח שהם בתמורה לזכות השכירות במושכר ו/או כל תוספת אחרת למעט דמי השכירות הנקובים בהסכם זה.  `}
+                  {`השוכר לא שילם כל דמי מפתח שהם בתמורה לזכות השכירות במושכר ו/או כל תוספת אחרת למעט דמי השכירות הנקובים בהסכם זה.  `}
                 </li>
               </ol>
             </li>
             <li style={{ textAlign: "justify" }}>
-            {`השוכר מצהיר כי הוא בדק את המושכר ומצא אותו תקין ובמצב המתאים לצרכי מגוריו בו, וזאת לשביעות רצונו. השוכר מוותר בזאת על כל טענה או תביעה שתהיה לו, אם תהיה, ביחס לאי התאמה במושכר. `}
+              {`השוכר מצהיר כי הוא בדק את המושכר ומצא אותו תקין ובמצב המתאים לצרכי מגוריו בו, וזאת לשביעות רצונו. השוכר מוותר בזאת על כל טענה או תביעה שתהיה לו, אם תהיה, ביחס לאי התאמה במושכר. `}
             </li>
             {this.state.show2 && (
-            <li style={{ textAlign: "justify" }}>
-            {this.state.AdditionalSection2}
-            </li>
-            
-          )}
+              <li style={{ textAlign: "justify" }}>
+                {this.state.AdditionalSection2}
+              </li>
+            )}
             <h3
               style={{
                 marginRight: -30,
@@ -468,18 +495,13 @@ class MainForm extends Component {
               התמורה
             </h3>
             <li style={{ textAlign: "justify" }}>
-            בתמורה לקבלת זכות השכירות במושכר, השוכר מתחייב לשלם לידי המשכיר סך של  {this
-                    .state.monthlypayment ||
-                    "____________"} מדי ה- {this.getpaymentday() ||
-                    "_____"}  לחודש. 
+              בתמורה לקבלת זכות השכירות במושכר, השוכר מתחייב לשלם לידי המשכיר סך
+              של {this.state.monthlypayment || "____________"} מדי ה-{" "}
+              {this.getpaymentday() || "_____"} לחודש.
             </li>
           </ol>
         </div>
       </div>
-      
-
-
-      
     );
   }
 }
@@ -489,8 +511,7 @@ const FormItem = (props: { text: string; children: any }) => (
     style={{
       display: "flex",
       justifyContent: "space-between",
-      marginBottom: 10,
-      
+      marginBottom: 10
     }}
   >
     <div style={{ width: 400 }}>{props.text}</div>
@@ -515,6 +536,5 @@ const FormItem2 = (props: { text: string; children: any }) => (
     {props.children}
   </div>
 );
-
 
 export default MainForm;
