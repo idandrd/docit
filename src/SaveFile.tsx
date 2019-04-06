@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { saveAs } from "file-saver";
-import Button from "@material-ui/core/Button";
+import { Button } from "antd";
 
 function export2Doc(elementId: string, filename = "") {
   const elemant = document.getElementById(elementId);
@@ -31,9 +31,8 @@ export class SaveFile extends Component<{ elementId: string }> {
     return (
       <div style={{ display: "flex", justifyContent: "center", marginTop: 50 }}>
         <Button
-          variant="contained"
-          color="primary"
-          style={{width: 300}}
+          type="primary"
+          style={{ width: 300 }}
           size="large"
           onClick={() => export2Doc("someRandomId", fileName)}
         >

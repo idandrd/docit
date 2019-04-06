@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { SaveFile } from "./SaveFile";
+import { Tabs, Input, Button, Icon } from "antd";
+const TabPane = Tabs.TabPane;
 
 class MainForm extends Component {
   state = {
+    currentTab: "1",
     show: false,
     signedAtCity: "",
     signedAtDate: "",
@@ -79,180 +82,206 @@ class MainForm extends Component {
             borderRadius: 20,
             textAlign: "right",
             fontSize: 20,
-            width: 400
+            width: 600,
+            backgroundColor: "#666666"
           }}
         >
-          <FormItem text="היכן נחתם החוזה (עיר/יישוב)?">
-            <input
-              value={this.state.signedAtCity}
-              onChange={({ target }) =>
-                this.setState({ signedAtCity: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="יום החתימה על ההסכם:">
-            <input
-              type="date"
-              onChange={({ target }) =>
-                this.setState({ signedAtDate: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="שם המשכיר:">
-            <input
-              value={this.state.lessorName}
-              onChange={({ target }) =>
-                this.setState({ lessorName: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="סוג זיהוי המשכיר:">
-            <select
-              style={{ width: 132 }}
-              value={this.state.lessorIdType}
-              onChange={({ target }) =>
-                this.setState({ lessorIdType: target.value })
-              }
-            >
-              <option value="private">אדם פרטי</option>
-              <option value="company">חברה</option>
-              <option value="ngo">עמותה</option>
-              <option value="partnership">שותפות רשומה</option>
-            </select>
-          </FormItem>
-          <FormItem text="מספר הזיהוי (משכיר):">
-            <input
-              value={this.state.lessorId}
-              onChange={({ target }) =>
-                this.setState({ lessorId: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="כתובת מלאה (משכיר):">
-            <input
-              value={this.state.lessorFullAddress}
-              onChange={({ target }) =>
-                this.setState({ lessorFullAddress: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="שם השוכר:">
-            <input
-              value={this.state.lesseeName}
-              onChange={({ target }) =>
-                this.setState({ lesseeName: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="מספר הזיהוי (השוכר):">
-            <input
-              value={this.state.lesseeId}
-              onChange={({ target }) =>
-                this.setState({ lesseeId: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="כתובת מלאה (השוכר):">
-            <input
-              value={this.state.lesseeFullAddress}
-              onChange={({ target }) =>
-                this.setState({ lesseeFullAddress: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="כמה חדרים יש במושכר?">
-            <input
-              value={this.state.roomnuber}
-              onChange={({ target }) =>
-                this.setState({ roomnuber: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="באיזה קומה המושכר?">
-            <input
-              value={this.state.floornumber}
-              onChange={({ target }) =>
-                this.setState({ floornumber: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="מהי כתובת הדירה המושכרת?">
-            <input
-              value={this.state.apartmentaddress}
-              onChange={({ target }) =>
-                this.setState({ apartmentaddress: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="מועד מסירת החזקה בדירה לשוכר (יום כניסת השוכר לדירה)?">
-            <input
-              type="date"
-              onChange={({ target }) =>
-                this.setState({ EntranceDate: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="מועד סיום תקופת השכירות  (יום פינוי המושכר  על ידי השוכר)">
-            <input
-              type="date"
-              onChange={({ target }) =>
-                this.setState({ LeaveDate: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="1הוסף סעיף">
-            <input
-              value={this.state.AdditionalSection1}
-              onChange={({ target }) =>
-                this.setState({ AdditionalSection1: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="2הוסף סעיף">
-            <input
-              value={this.state.AdditionalSection2}
-              onChange={({ target }) =>
-                this.setState({ AdditionalSection2: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="מהו גובה שכר הדירה החודשי הנדרש?">
-            <input
-              value={this.state.monthlypayment}
-              onChange={({ target }) =>
-                this.setState({ monthlypayment: target.value })
-              }
-            />
-          </FormItem>
-          <FormItem text="באיזה יום בחודש ידרש השוכר לשלם את שכר הדירה / התמורה?">
-            <select
-              style={{ width: 132 }}
-              value={this.state.paymentday}
-              onChange={({ target }) =>
-                this.setState({ paymentday: target.value })
-              }
-            >
-              <option value="1th">ב1 לחודש</option>
-              <option value="10th"> ב10 לחודש</option>
-              <option value="15th">ב15 לחודש</option>
-              <option value="otherth">אחר(ידנית)</option>
-            </select>
-          </FormItem>
-          <FormItem text="יום החתימה על ההסכם:">
-            <input
-              type="checkbox"
-              onChange={() => this.setState({ show: !this.state.show })}
-            />
-          </FormItem>
-          {this.state.show && (
-            <FormItem text="I'm here!!!">
-              <input
-                type="checkbox"
-                onChange={() => this.setState({ show: !this.state.show })}
-              />
-            </FormItem>
-          )}
-          <SaveFile elementId={this.contractElementId} />
+          <Tabs
+            tabPosition="right"
+            activeKey={this.state.currentTab}
+            onChange={key => this.setState({ currentTab: key })}
+          >
+            <TabPane tab="פרטים כלליים" key="1">
+              <FormItem text="היכן נחתם החוזה (עיר/יישוב)?">
+                <Input
+                  value={this.state.signedAtCity}
+                  onChange={({ target }) =>
+                    this.setState({ signedAtCity: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="יום החתימה על ההסכם:">
+                <Input
+                  type="date"
+                  onChange={({ target }) =>
+                    this.setState({ signedAtDate: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="שם המשכיר:">
+                <Input
+                  value={this.state.lessorName}
+                  onChange={({ target }) =>
+                    this.setState({ lessorName: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="סוג זיהוי המשכיר:">
+                <select
+                  style={{ width: 132 }}
+                  value={this.state.lessorIdType}
+                  onChange={({ target }) =>
+                    this.setState({ lessorIdType: target.value })
+                  }
+                >
+                  <option value="private">אדם פרטי</option>
+                  <option value="company">חברה</option>
+                  <option value="ngo">עמותה</option>
+                  <option value="partnership">שותפות רשומה</option>
+                </select>
+              </FormItem>
+              <FormItem text="מספר הזיהוי (משכיר):">
+                <Input
+                  value={this.state.lessorId}
+                  onChange={({ target }) =>
+                    this.setState({ lessorId: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="כתובת מלאה (משכיר):">
+                <Input
+                  value={this.state.lessorFullAddress}
+                  onChange={({ target }) =>
+                    this.setState({ lessorFullAddress: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="שם השוכר:">
+                <Input
+                  value={this.state.lesseeName}
+                  onChange={({ target }) =>
+                    this.setState({ lesseeName: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="מספר הזיהוי (השוכר):">
+                <Input
+                  value={this.state.lesseeId}
+                  onChange={({ target }) =>
+                    this.setState({ lesseeId: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="כתובת מלאה (השוכר):">
+                <Input
+                  value={this.state.lesseeFullAddress}
+                  onChange={({ target }) =>
+                    this.setState({ lesseeFullAddress: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="כמה חדרים יש במושכר?">
+                <Input
+                  value={this.state.roomnuber}
+                  onChange={({ target }) =>
+                    this.setState({ roomnuber: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="באיזה קומה המושכר?">
+                <Input
+                  value={this.state.floornumber}
+                  onChange={({ target }) =>
+                    this.setState({ floornumber: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="מהי כתובת הדירה המושכרת?">
+                <Input
+                  value={this.state.apartmentaddress}
+                  onChange={({ target }) =>
+                    this.setState({ apartmentaddress: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="מועד מסירת החזקה בדירה לשוכר (יום כניסת השוכר לדירה)?">
+                <Input
+                  type="date"
+                  onChange={({ target }) =>
+                    this.setState({ EntranceDate: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="מועד סיום תקופת השכירות  (יום פינוי המושכר  על ידי השוכר)">
+                <Input
+                  type="date"
+                  onChange={({ target }) =>
+                    this.setState({ LeaveDate: target.value })
+                  }
+                />
+              </FormItem>
+
+              <Button disabled>
+                <Icon type="right" />
+                הקודם
+              </Button>
+              <Button
+                type="primary"
+                onClick={() => this.setState({ currentTab: "2" })}
+              >
+                הבא
+                <Icon type="left" />
+              </Button>
+            </TabPane>
+            <TabPane tab="בעלי חיים" key="2">
+              <FormItem text="1הוסף סעיף">
+                <Input
+                  value={this.state.AdditionalSection1}
+                  onChange={({ target }) =>
+                    this.setState({ AdditionalSection1: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="2הוסף סעיף">
+                <Input
+                  value={this.state.AdditionalSection2}
+                  onChange={({ target }) =>
+                    this.setState({ AdditionalSection2: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="מהו גובה שכר הדירה החודשי הנדרש?">
+                <Input
+                  value={this.state.monthlypayment}
+                  onChange={({ target }) =>
+                    this.setState({ monthlypayment: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="באיזה יום בחודש ידרש השוכר לשלם את שכר הדירה / התמורה?">
+                <select
+                  style={{ width: 132 }}
+                  value={this.state.paymentday}
+                  onChange={({ target }) =>
+                    this.setState({ paymentday: target.value })
+                  }
+                >
+                  <option value="1th">ב1 לחודש</option>
+                  <option value="10th"> ב10 לחודש</option>
+                  <option value="15th">ב15 לחודש</option>
+                  <option value="otherth">אחר(ידנית)</option>
+                </select>
+              </FormItem>
+              <FormItem text="יום החתימה על ההסכם:">
+                <input
+                  type="checkbox"
+                  onChange={() => this.setState({ show: !this.state.show })}
+                />
+              </FormItem>
+              {this.state.show && (
+                <FormItem text="I'm here!!!">
+                  <input
+                    type="checkbox"
+                    onChange={() => this.setState({ show: !this.state.show })}
+                  />
+                </FormItem>
+              )}
+              <SaveFile elementId={this.contractElementId} />
+            </TabPane>
+            <TabPane tab="גינה" key="3">
+              Idan
+            </TabPane>
+          </Tabs>
         </div>
         <div
           id={this.contractElementId}
@@ -465,8 +494,8 @@ const FormItem = (props: { text: string; children: any }) => (
       marginBottom: 20
     }}
   >
-    <div>{props.text}</div>
-    {props.children}
+    <div style={{ width: 400 }}>{props.text}</div>
+    <div style={{ width: 400 }}>{props.children}</div>
   </div>
 );
 
