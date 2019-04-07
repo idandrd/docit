@@ -8,8 +8,9 @@ import {
   scroller,
   animateScroll
 } from "react-scroll";
-import { Tabs, Input, Button, Icon } from "antd";
+import { Tabs, Input, Button, Icon, Radio } from "antd";
 const TabPane = Tabs.TabPane;
+
 
 class MainForm extends Component {
   state = {
@@ -18,6 +19,8 @@ class MainForm extends Component {
     show1: false,
     show2: false,
     showOptionpPriod: false,
+    showchecks: "",
+    showEFT: "",
     OptionPeriod: "",
     signedAtCity: "",
     signedAtDate: "",
@@ -40,8 +43,13 @@ class MainForm extends Component {
     AdditionalSection1: "",
     AdditionalSection2: "",
     monthlypayment: "",
+    monthlyoptionpayment: "",
     paymentday: "",
     paymentmethodo: "",
+    banknumber: "",
+    brancknumber: "",
+    accountnumber: "",
+    delayinpayment: "",
     showerace1: false,
     erace1: true,
     showerace2: ""
@@ -138,7 +146,7 @@ class MainForm extends Component {
               style={{ width: 300 }}
               size="large"
               onClick={() => this.handleTabChange("0")}>
-                חולל:)
+                חולל :)
               </Button>
           </div>
           </TabPane>
@@ -150,11 +158,12 @@ class MainForm extends Component {
             borderRadius: 20, color: "white", margin: 5}}></img>
             </div>
             <div style={{ display: "flex", justifyContent: "center"}}>
-            <img src="smoking.png" alt="Italian Trulli" style={{ display: "flex", width: 200, height: 145, border: "solid",
+            <img src="smoking.png" alt="Italian Trulli" style={{ display: "flex", width: 200, height: 145,
             borderRadius: 20, color: "white", margin: 5}}></img>
             <Button 
-            
-            onClick={() =>  this.setState({ showOptionpPriod: !this.state.showOptionpPriod })}  style={{ justifyContent: "center", width: 200, height: 145, border: "solid",
+            type="primary"
+            onClick={() =>  this.setState({ showOptionpPriod: !this.state.showOptionpPriod })}  
+            style={{ justifyContent: "center", width: 200, height: 145, border: "solid",
             borderRadius: 20, color: "white", margin: 5,} }>
             <img src="option-period.png" alt="Italian Trulli" style={{width: 150, height: 135, color: "white"}}></img>
             </Button>
@@ -175,7 +184,7 @@ class MainForm extends Component {
                 הקודם
               </Button>
               <Button type="primary" onClick={() => this.handleTabChange("1")}>
-                הבא
+                שמור והמשך
                 <Icon type="left" />
               </Button>
               </div>
@@ -187,6 +196,7 @@ class MainForm extends Component {
                   onChange={({ target }) =>
                     this.setState({ signedAtCity: target.value })
                   }
+                
                 />
               </FormItem>
               <FormItem text="יום החתימה על ההסכם:">
@@ -259,6 +269,18 @@ class MainForm extends Component {
                   }
                 />
               </FormItem>
+              <div style={{ display: "flex", justifyContent: "center"}}>
+            <Button type="primary" onClick={() => this.handleTabChange("0")} style={{ justifyContent: "center"}}>
+                <Icon type="right" />
+                הקודם
+              </Button>
+              <Button type="primary" onClick={() => this.handleTabChange("2")}>
+                שמור והמשך
+                <Icon type="left" />
+              </Button>
+              </div>
+              </TabPane>
+              <TabPane tab="פרטי המושכר " key="2">
               <FormItem text="כמה חדרים יש במושכר?">
                 <Input
                   value={this.state.roomnuber}
@@ -283,6 +305,18 @@ class MainForm extends Component {
                   }
                 />
               </FormItem>
+              <div style={{ display: "flex", justifyContent: "center"}}>
+            <Button type="primary" onClick={() => this.handleTabChange("1")} style={{ justifyContent: "center"}}>
+                <Icon type="right" />
+                הקודם
+              </Button>
+              <Button type="primary" onClick={() => this.handleTabChange("3")}>
+                שמור והמשך
+                <Icon type="left" />
+              </Button>
+              </div>
+              </TabPane>
+              <TabPane tab="הגדרת תקופת השכירות " key="3">
               <FormItem text="מועד מסירת החזקה בדירה לשוכר (יום כניסת השוכר לדירה)?">
                 <Input
                   type="date"
@@ -300,17 +334,19 @@ class MainForm extends Component {
                 />
               </FormItem>
 
-              <Button disabled>
+              <div style={{ display: "flex", justifyContent: "center"}}>
+            <Button type="primary" onClick={() => this.handleTabChange("2")} style={{ justifyContent: "center"}}>
                 <Icon type="right" />
                 הקודם
               </Button>
-              <Button type="primary" onClick={() => this.handleTabChange("2")}>
-                הבא
+              <Button type="primary" onClick={() => this.handleTabChange("4")}>
+                שמור והמשך
                 <Icon type="left" />
               </Button>
+              </div>
             </TabPane>
             {this.state.showOptionpPriod && (
-            <TabPane tab=" תקותאופציה" key="2">
+            <TabPane tab=" תקותאופציה" key="4">
               <FormItem text="באיזה יום בחודש ידרש השוכר לשלם את שכר הדירה / התמורה?">
                 <select
                   style={{ width: 132 }}
@@ -333,9 +369,6 @@ class MainForm extends Component {
                   }
                 />
               </FormItem>
-            </TabPane>
-            )}
-            <TabPane tab="בעלי חיים" key="3">
               <FormItem text="1הוסף סעיף">
                 <Input
                   value={this.state.AdditionalSection1}
@@ -344,14 +377,21 @@ class MainForm extends Component {
                   }
                 />
               </FormItem>
-              <FormItem text="2הוסף סעיף">
-                <Input
-                  value={this.state.AdditionalSection2}
-                  onChange={({ target }) =>
-                    this.setState({ AdditionalSection2: target.value })
-                  }
-                />
-              </FormItem>
+              <div style={{ display: "flex", justifyContent: "center"}}>
+            <Button type="primary" onClick={() => this.handleTabChange("3")} style={{ justifyContent: "center"}}>
+                <Icon type="right" />
+                הקודם
+              </Button>
+              <Button type="primary" onClick={() => this.handleTabChange("5")}>
+                שמור והמשך
+                <Icon type="left" />
+              </Button>
+              </div>
+            </TabPane>
+            )}
+
+              <TabPane tab="התמורה " key="5">
+
               <FormItem text="מהו גובה שכר הדירה החודשי הנדרש?">
                 <Input
                   value={this.state.monthlypayment}
@@ -360,6 +400,16 @@ class MainForm extends Component {
                   }
                 />
               </FormItem>
+              {this.state.showOptionpPriod && (
+              <FormItem text="מהו גובה שכר הדירה החודשי בתקופת האופציה?">
+                <Input
+                  value={this.state.monthlyoptionpayment}
+                  onChange={({ target }) =>
+                    this.setState({ monthlyoptionpayment: target.value })
+                  }
+                />
+              </FormItem>
+              )}
               <FormItem text="באיזה יום בחודש ידרש השוכר לשלם את שכר הדירה / התמורה?">
                 <select
                   style={{ width: 132 }}
@@ -374,7 +424,67 @@ class MainForm extends Component {
                   <option value="otherth">אחר(ידנית)</option>
                 </select>
               </FormItem>
-              <FormItem text="יום החתימה על ההסכם:">
+              <FormItem text="באיזה יום בחודש ידרש השוכר לשלם את שכר הדירה / התמורה?">
+                <select
+                  style={{ width: 132 }}
+                  value={this.state.paymentmethodo}
+                  onChange={({ target }) =>
+                    this.setState({ paymentmethodo: target.value })
+                  }
+                >
+                  <option value="checks">צ׳קים</option>
+                  <option value="EFT"> העברה בנקאית</option>
+                </select>
+              </FormItem>
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: 5}}>
+            <Button 
+            type="primary"
+            onClick={() =>  this.setState({ showchecks: !this.state.showchecks })}>
+            תשלום בצ׳קים
+            </Button>
+            <Button 
+            type="primary"
+            onClick={() =>  this.setState({ showEFT: !this.state.showEFT })}>
+            העברה בנקאית
+            </Button>
+            </div>
+            <div >
+              {this.state.showchecks && ('הוזן להסכם תשלום בצ׳קים')}
+              {this.state.showEFT && (
+              <FormItem text="חשבון המשכיר">
+                <Input style={{marginTop: 2}}
+                  placeholder= "מספר בנק"
+                  value={this.state.banknumber}
+                  onChange={({ target }) =>
+                    this.setState({ banknumber: target.value })
+                  }
+                />
+                <Input style={{marginTop: 2}}
+                  placeholder= "מספר סניף"
+                  value={this.state.brancknumber}
+                  onChange={({ target }) =>
+                    this.setState({ brancknumber: target.value })
+                  }
+                />
+                <Input style={{marginTop: 2}}
+                  placeholder= "מספר חשבון"
+                  value={this.state.accountnumber}
+                  onChange={({ target }) =>
+                    this.setState({ accountnumber: target.value })
+                  }
+                />
+              </FormItem>
+              )}
+              <FormItem text="לאחר כמה ימי איחור בתשלום יוכל המשכיר לפרוע את צ׳ק הביטחון?">
+                <Input
+                  value={this.state.delayinpayment}
+                  onChange={({ target }) =>
+                    this.setState({ delayinpayment: target.value })
+                  }
+                />
+              </FormItem>
+            </div>
+              <FormItem text="הוספת סעיף">
                 <input
                   type="checkbox"
                   onChange={() => this.setState({ show: !this.state.show })}
@@ -387,11 +497,9 @@ class MainForm extends Component {
                     onChange={() => this.setState({ show: !this.state.show })}
                   />
                 </FormItem>
+                
               )}
               <SaveFile elementId={this.contractElementId} />
-            </TabPane>
-            <TabPane tab="חצר" key="4">
-              Idan
             </TabPane>
           </Tabs>
         </div>
@@ -465,6 +573,7 @@ class MainForm extends Component {
               </p>
             </div>
           </div>
+          <Element name="section2">
           <div style={{ display: "flex" }}>
             <p style={{ marginLeft: 20 }}>הואיל:</p>
             <div style={{ flex: 1 }}>
@@ -479,10 +588,11 @@ class MainForm extends Component {
               </p>
             </div>
           </div>
+          </Element>
           <div style={{ display: "flex", marginTop: -25 }}>
             <p style={{ marginLeft: 20 }}>והואיל:</p>
             <div style={{ flex: 1 }}>
-              <p>{`  ולשוכר ידוע כי ביום תחילתו של חוק הגנת הדייר (נוסח משולב), התשל"ב-1972 ו/או ביום${this
+              <p style={{ textAlign: "justify" }}>{`  ולשוכר ידוע כי ביום תחילתו של חוק הגנת הדייר (נוסח משולב), התשל"ב-1972 ו/או ביום${this
                 .state.signedAtDate ||
                 "___"} ולאחר מכן היה המושכר פנוי ולא היה דייר שהיה זכאי להחזיק בו, וכי לא יחולו ביחס למושכר הוראות חוק הגנת הדייר ו/או כל הוראות הבאות להגביל את השכירות;
                 `}</p>
@@ -491,7 +601,7 @@ class MainForm extends Component {
           <div style={{ display: "flex", marginTop: -25 }}>
             <p style={{ marginLeft: 20 }}>והואיל:</p>
             <div style={{ flex: 1 }}>
-              <p>{`  והמשכיר מעוניין להשכיר לשוכר את המושכר בשכירות בלתי מוגנת, והשוכר מעוניין לשכור מהמשכיר את המושכר בשכירות בלתי מוגנת, והכל בכפוף לתנאי הסכם זה;
+              <p style={{ textAlign: "justify" }}>{`  והמשכיר מעוניין להשכיר לשוכר את המושכר בשכירות בלתי מוגנת, והשוכר מעוניין לשכור מהמשכיר את המושכר בשכירות בלתי מוגנת, והכל בכפוף לתנאי הסכם זה;
               `}</p>
             </div>
           </div>
@@ -500,7 +610,6 @@ class MainForm extends Component {
             <p
               style={{ textAlign: "center", fontWeight: "bold" }}
             >{`ולפיכך הוסכם והותנה בין הצדדים כדלקמן:`}</p>
-            <Element name="section2">
               <h3
                 style={{
                   marginRight: -30,
@@ -509,12 +618,12 @@ class MainForm extends Component {
               >
                 מבוא
               </h3>
-            </Element>
             <div style={{ display: "flex" }}>
               {this.state.erace1 && (
                 <li
+                  style={{ textAlign: "justify" }}
                   onMouseOver={() =>
-                    this.setState({ showerace1: !this.state.showerace1 })
+                  this.setState({ showerace1: !this.state.showerace1 })
                   }
                 >
                   {`המבוא להסכם זה מהווה חלק בלתי נפרד הימנו. אין לפרש הוראה מהוראותיו בניגוד למשמעות הטבעית והרגילה של מילות הסכם זה.`}
@@ -528,6 +637,7 @@ class MainForm extends Component {
                 </p>
               )}
             </div>
+            <Element name="section3">
             <h3
               style={{
                 marginRight: -30,
@@ -536,20 +646,25 @@ class MainForm extends Component {
             >
               תקופת השכירות
             </h3>
+            </Element>
             <li style={{ textAlign: "justify" }}>
-              {`המשכיר משכיר בזאת את המושכר בשכירות בלתי מוגנת לשוכר, והשוכר שוכר בזאת את המושכר בשכירות בלתי מוגנת לתקופה בת(יציג את התאריך בין 2 התאריכים שהוזנו) חודשים החל מיום ${this
+              {`המשכיר משכיר בזאת את המושכר בשכירות בלתי מוגנת לשוכר, והשוכר שוכר בזאת את המושכר בשכירות בלתי מוגנת לתקופה בת(יציג את התאריך בין 2 התאריכים שהוזנו!!!!!!!!!) חודשים החל מיום ${this
                 .state.EntranceDate || "____________"} ועד יום ${this.state
                 .LeaveDate || "____________"} `}{" "}
               (להלן: "<b>תקופת השכירות</b>").
             </li>
+            <Element name="section4">
             {this.state.showOptionpPriod && (
+            
               <li style={{ textAlign: "justify" }}>
               {`היה והשוכר החליט כי ברצונו להאריך את תקופת השכירות, והמשכיר הסכים על ההארכה בהודעה בכתב עד ${this
                 .state.OptionPeriodDay || "____________"} , תקופה זו תעמוד על ${this.state
                 .OptionPeriod || "____________"} `}{" "}
               (להלן: "<b>תקופת האופציה</b>").
               </li>
+            
             )}
+            </Element>
             {this.state.show1 && (
               <li style={{ textAlign: "justify" }}>
                 {this.state.AdditionalSection1}
@@ -563,13 +678,16 @@ class MainForm extends Component {
             >
               הצהרות השוכר
             </h3>
-            <li>
+          <li style={{ textAlign: "justify" }}>
+
               {` השוכר מצהיר בזאת כי ידוע לו והוא מסכים לקבל את המושכר בשכירות בלתי מוגנת, וזאת בכפוף לאמור להלן: `}
               <ol type="i">
-                <li>
+          <li style={{ textAlign: "justify" }}>
+
                   {` השוכר אינו ולא יהיה דייר מוגן לפי חוק הגנת הדייר (נוסח משולב), התשל"ב-1972 ולא לפי כל חוק או דין אחר; לא תחול עליו כל הגנה מכל סוג ומין שהוא וכל הגנה מההגנות הקנויות לדייר מוגן.  `}
                 </li>
-                <li>
+          <li style={{ textAlign: "justify" }}>
+
                   {`השוכר לא שילם כל דמי מפתח שהם בתמורה לזכות השכירות במושכר ו/או כל תוספת אחרת למעט דמי השכירות הנקובים בהסכם זה.  `}
                 </li>
               </ol>
@@ -582,6 +700,7 @@ class MainForm extends Component {
                 {this.state.AdditionalSection2}
               </li>
             )}
+            <Element name="section5">
             <h3
               style={{
                 marginRight: -30,
@@ -590,11 +709,50 @@ class MainForm extends Component {
             >
               התמורה
             </h3>
+            </Element>
             <li style={{ textAlign: "justify" }}>
               בתמורה לקבלת זכות השכירות במושכר, השוכר מתחייב לשלם לידי המשכיר סך
               של {this.state.monthlypayment || "____________"} מדי ה-{" "}
               {this.getpaymentday() || "_____"} לחודש.
             </li>
+            {this.state.showOptionpPriod && (
+            <p style={{ textAlign: "justify" }}>    
+              היה והצדדים הגיעו להבנות כי השוכר יממש את תקופת האופציה, המשכיר רשאי להעלות את גובה דמי השכירות עם תחילת תקופת האופציה לסך של {this.state.monthlyoptionpayment || "____________"} אלא אם המשכיר הודיע לשוכר כי אין בכוונתו לממש את זכותו להעלאת דמי השכירות כאמור. 
+            </p>
+            )}
+            {this.state.showchecks && (
+            <p style={{ textAlign: "justify" }}>
+              השוכר יפקיד (מספר חודשי השיכורת!!!!!!!) שיקים ע"ס {this.state.monthlypayment || "____________"} כל אחד להקלה על גביית דמי השכירות. היה והשוכר ישכור את המושכר מעל 12 חודשים, יהא עליו להפקיד עד 12 שיקים בתחילת כל שנת שכירות חדשה, בהתאם ליום החתימה על ההסכם ומספר חודשי השכירות באותה השנה.
+            </p>
+            )}
+            {this.state.showEFT && (
+            <p style={{ textAlign: "justify" }}>
+           השוכר יידרש לשלם את שכר הדירה החודשי בדרך של הוראת קבע לחשבון שמספרו {this.state.accountnumber || "__________"} - {this.state.brancknumber || "______"} - {this.state.banknumber || "___"} או מזומן, לפי החלטת המשכיר, מדי {this.getpaymentday() || "_____"} לחודש.
+            </p>
+            )}
+          <li style={{ textAlign: "justify" }}>
+              השוכר מתחייב לשלם את דמי השכירות באופן שוטף, מדויק, מלא, חודש בחודשו ובמועד המצויין לעיל.
+          </li>
+          <li style={{ textAlign: "justify" }}>
+          בנוסף לכל סעד אחר העומד לזכות המשכיר על פי דין, איחור בתשלום כלשהו מדמי השכירות העולה מעל {this.state.delayinpayment || "____________"} ימים יוביל לעמידת השיק שברשות המשכיר לפירעון מיידי כנגד אותו חודש נשוא האיחור. 
+          </li>
+          <h3
+              style={{
+                marginRight: -30,
+                textDecoration: "underline"
+              }}
+            >
+              אי עבירות ואי משכון זכות השכירות
+            </h3>
+          <li style={{ textAlign: "justify" }}>
+              {` השוכר מתחייב שלא להעביר/להשכיר/למסור/למשכן את זכויותיו על פי הסכם זה (שימוש וחזקה), מקצתם או כולם, לאף צד ג' ושלתת לו להשתמש ו/או ליהנות מזכויותיהם במושכר אלא למטרות אירוח סביר בלבד, למעט לינה יותר מלילה אחד בשבוע אלא אם סוכם אחרת מראש ובכתב. תנאי זה כולל גם בין אם אחת מהפעולות הנ"ל נעשו בין בתמורה ובין שלא בתמורה אלא אם כן הן קיבלו את הסכמת המשכיר מראש ובכתב.  `}
+         </li>
+         <li style={{ textAlign: "justify" }}>
+              {`המושכר ישמש אך ורק למטרת מגורים, ועל השוכר לנהוג בו כמנהג בעלים, ולעשות בו שימוש הוגן וסביר, לרבות שמירה על השקט, הניקיון והסדר במושכר ועל כל הכללים הנהוגים מכוח הנוהג במקום. `}
+         </li>
+         <li style={{ textAlign: "justify" }}>
+              {`השוכר מצהיר כי ידוע לו שכל שיפור/שינוי/כל תוספת במושכר שייעשה, במידה שייעשה, יהיה רכוש המשכיר בלבד, והם לא יהיו זכאים לדרוש בחזרה את התוספת/התיקון/תמורתם. השוכר מוותר על כל טענה או תביעה שתהיה לו, אם תהיה, כלפי המשכיר ביחס לכל שינוי/תיקון/תוספת כאמור לעיל .`}      
+        </li>
           </ol>
         </div>
       </div>
