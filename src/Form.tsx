@@ -50,7 +50,19 @@ class MainForm extends Component {
     brancknumber: "",
     accountnumber: "",
     delayinpayment: "",
+    tax: "",
+    compensation: "",
+    description: "",
+    hoursfix: "",
+    plastering: false,
+    showflaw: false,
+    flaw: "",
     showerace1: false,
+    insurance: false,
+    pool: false,
+    yard: false,
+    pets: "",
+    smoking: "",
     erace1: true,
     showerace2: ""
   };
@@ -169,15 +181,28 @@ class MainForm extends Component {
             </Button>
             </div>
             <div style={{ display: "flex", justifyContent: "center"}}>
-            <img src="yard.png" alt="Italian Trulli" style={{ display: "flex", width: 200, height: 145, border: "solid",
-            borderRadius: 20, color: "white", margin: 5}}></img>
-            <img src="pool.png" alt="Italian Trulli" style={{ display: "flex", width: 200, height: 145, border: "solid",
-            borderRadius: 20, color: "white", margin: 5}}></img>
+            <Button 
+            type="primary"
+            onClick={() =>  this.setState({ yard: !this.state.yard })}  
+            style={{ justifyContent: "center", width: 200, height: 145, border: "solid",
+            borderRadius: 20, color: "white", margin: 5,} }>
+            <img src="yard.png" alt="Italian Trulli" style={{width: 150, height: 135, color: "white"}}></img>
+            </Button>
+            <Button 
+            type="primary"
+            onClick={() =>  this.setState({ pool: !this.state.pool })}  
+            style={{ justifyContent: "center", width: 200, height: 145, border: "solid",
+            borderRadius: 20, color: "white", margin: 5,} }>
+            <img src="pool.png" alt="Italian Trulli" style={{width: 150, height: 135, color: "white"}}></img>
+            </Button>
             </div>
-            <div style={{ display: "flex", justifyContent: "center"}}>
-            <img src="insurance.png" alt="Italian Trulli" style={{ display: "flex", width: 200, height: 145, border: "solid",
-            borderRadius: 20, color: "white", margin: 5}}></img>
-            </div>
+            <Button 
+            type="primary"
+            onClick={() =>  this.setState({ insurance: !this.state.insurance })}  
+            style={{ justifyContent: "center", width: 200, height: 145, border: "solid",
+            borderRadius: 20, color: "white", margin: 5,} }>
+            <img src="insurance.png" alt="Italian Trulli" style={{width: 150, height: 135, color: "white"}}></img>
+            </Button>
             <div style={{ display: "flex", justifyContent: "center"}}>
             <Button type="primary" onClick={() => this.handleTabChange("-1")} style={{ justifyContent: "center"}}>
                 <Icon type="right" />
@@ -499,6 +524,141 @@ class MainForm extends Component {
                 </FormItem>
                 
               )}
+             <div style={{ display: "flex", justifyContent: "center"}}>
+            <Button type="primary" onClick={() => this.handleTabChange("4")} style={{ justifyContent: "center"}}>
+                <Icon type="right" />
+                הקודם
+              </Button>
+              <Button type="primary" onClick={() => this.handleTabChange("6")}>
+                שמור והמשך
+                <Icon type="left" />
+              </Button>
+              </div>
+            </TabPane>
+            <TabPane tab=" תשלומי חובה ומיסים" key="6">
+            <FormItem text="מהם תשלומי החובה והמסים שיוטלו על השוכר?">
+                <Input
+                  value={this.state.tax}
+                  onChange={({ target }) =>
+                    this.setState({ tax: target.value })
+                  }
+                />
+              </FormItem>
+
+              <div style={{ display: "flex", justifyContent: "center"}}>
+            <Button type="primary" onClick={() => this.handleTabChange("5")} style={{ justifyContent: "center"}}>
+                <Icon type="right" />
+                הקודם
+              </Button>
+              <Button type="primary" onClick={() => this.handleTabChange("7")}>
+                שמור והמשך
+                <Icon type="left" />
+              </Button>
+              </div>
+            </TabPane>
+            <TabPane tab=" פיצוי מוסכם" key="7">
+            <FormItem text="מהו סכום הפיצוי המוסכם היומי בגין אי פינוי המושכר על ידי השוכר במועד?">
+                <Input
+                  value={this.state.compensation}
+                  onChange={({ target }) =>
+                    this.setState({ compensation: target.value })
+                  }
+                />
+              </FormItem>
+
+              <div style={{ display: "flex", justifyContent: "center"}}>
+            <Button type="primary" onClick={() => this.handleTabChange("6")} style={{ justifyContent: "center"}}>
+                <Icon type="right" />
+                הקודם
+              </Button>
+              <Button type="primary" onClick={() => this.handleTabChange("8")}>
+                שמור והמשך
+                <Icon type="left" />
+              </Button>
+              </div>
+            </TabPane>
+            <TabPane tab="תחזוקת המושכר " key="8">
+            <FormItem text="כיצד המושכר נראה (למעט נקי ומתאים למגורים)?">
+                <Input
+                  value={this.state.description}
+                  onChange={({ target }) =>
+                    this.setState({ description: target.value })
+                  }
+                />
+              </FormItem>
+              <FormItem text="סיוד הדירה בתום תקופת השכירות">
+                <input
+                  type="checkbox"
+                  onChange={() => this.setState({ plastering: !this.state.plastering })}
+                />
+              </FormItem>
+              <FormItem text="תוך כמה זמן על המשכיר לתקן את הנזקים שעליו לתקן והמצריכים תיקון מיידי? ">
+                <select
+                style={{ width: 132 }}
+                value={this.state.hoursfix}
+                onChange={({ target }) =>
+                  this.setState({ hoursfix: target.value })
+                }
+              >
+                <option value="24 ">24 שעות</option>
+                <option value="48"> 48 שעות</option>
+                <option value="72">72 שעות</option>
+                <option value="_____ ">אחר </option>
+              </select>
+              </FormItem>
+              <FormItem text="  קיימים פגמים בדירה ">
+                <input
+                  type="checkbox"
+                  onChange={() => this.setState({ showflaw: !this.state.showflaw })}
+                />
+              </FormItem>
+              {this.state.showflaw && (
+              <FormItem text="מהם הפגמים במושכר שיפגעו בצרכי השוכר במהלך תקופת השכירות וידרשו תיקון בידי המשכיר?">
+              <Input
+                value={this.state.flaw}
+                onChange={({ target }) =>
+                  this.setState({ flaw: target.value })
+                }
+              />
+            </FormItem>
+                
+              )}
+            <FormItem text="האם מותר לגדל ולהחזיק בעלי חיים במושכר?">
+                <select
+                style={{ width: 132 }}
+                value={this.state.pets}
+                onChange={({ target }) =>
+                  this.setState({ pets: target.value })
+                }
+              >
+                <option value="השוכר אינו רשאי לגדל או להחזיק כל בעל חיים במושכר. ">אסור</option>
+                <option value="השוכר מתחייב לשמור על ניקיון המושכר וסביבותיו, על השקט ועל יחסי שכנות טובה עם השכנים בבניין. כן השוכר רשאי לגדל חיות מחמד במושכר בתנאי שגידולם לא יוביל לסטייה מחובתו לשמור על ניקיון המושכר וסביבותיו, על השקט ועל יחסי שכנות טובה עם השכנים בבניין. ">מותר</option>
+
+              </select>
+              </FormItem>
+              <FormItem text="האם מותר לגדל ולהחזיק בעלי חיים במושכר?">
+                <select
+                style={{ width: 132 }}
+                value={this.state.pets}
+                onChange={({ target }) =>
+                  this.setState({ pets: target.value })
+                }
+              >
+                <option value="העישון בדירה אסור לחלוטין, כל עישון בדירה יחויב בקנס של 1,000 ₪.  ">אסור</option>
+                <option value="העישון בדירה אסור לחלוטין/אפשר לעשן רק במרפסת/כל עישון בדירה יחויב בקנס בסך של 1,000 ₪.">מותר</option>
+
+              </select>
+              </FormItem>
+              <div style={{ display: "flex", justifyContent: "center"}}>
+            <Button type="primary" onClick={() => this.handleTabChange("7")} style={{ justifyContent: "center"}}>
+                <Icon type="right" />
+                הקודם
+              </Button>
+              <Button type="primary" onClick={() => this.handleTabChange("9")}>
+                שמור והמשך
+                <Icon type="left" />
+              </Button>
+              </div>
               <SaveFile elementId={this.contractElementId} />
             </TabPane>
           </Tabs>
@@ -753,6 +913,106 @@ class MainForm extends Component {
          <li style={{ textAlign: "justify" }}>
               {`השוכר מצהיר כי ידוע לו שכל שיפור/שינוי/כל תוספת במושכר שייעשה, במידה שייעשה, יהיה רכוש המשכיר בלבד, והם לא יהיו זכאים לדרוש בחזרה את התוספת/התיקון/תמורתם. השוכר מוותר על כל טענה או תביעה שתהיה לו, אם תהיה, כלפי המשכיר ביחס לכל שינוי/תיקון/תוספת כאמור לעיל .`}      
         </li>
+            <Element name="section6">
+            <h3
+              style={{
+                marginRight: -30,
+                textDecoration: "underline"
+              }}
+            >
+              תשלומי חובה ומסים
+            </h3>
+            </Element>
+            <li style={{ textAlign: "justify" }}>
+            השוכר מתחייב לעמוד בתשלומי החובה והמסים, ובכללם 
+            {" "}{this.state.tax || "____________"}.
+              השוכר מתחייב לשלם חיובים אלה במועד, זאת בהתאם למועד הנדרש לאותו תשלום חובה ו/או מס, ולהעביר את חיובים אלה על שמו ברישומי הגופים הרלבנטיים, לרבות רשות מקומית, מדינת ישראל, חברת החשמל, תאגיד מים, חברת כבלים וכדומה.  
+            </li>
+            <li style={{ textAlign: "justify" }}>
+              היה והשוכר לא יעמוד בתשלומים אלה, ובעקבות זאת נודע למשכיר אודות אי התשלום כאמור, תהא באפשרות המשכיר לבטל את הסכם זה בהודעה בכתב לשוכר בתוך 30 ימים מהיום שנודע לו על כך. יובהר כי אין במימוש אפשרות זו בידי המשכיר כדי לפגוע או לגרוע מזכותו לתבוע כל תרופה אחרת על פי דין.  
+            </li>
+            <Element name="section7">
+            <h3
+              style={{
+                marginRight: -30,
+                textDecoration: "underline"
+              }}
+            >
+              פיצוי מוסכם
+            </h3>
+            </Element>
+            <li style={{ textAlign: "justify" }}>
+            אם השוכר לא יפנה את הדירה בתום תקופת השכירות, יהא עליו לשלם למשכיר סך של
+            {" "}{this.state.compensation || "____________"}{" "}ש״ח.
+              לכל יום של פיגור בפינוי הדירה והחזרתה למשכיר, וזאת מבלי לפגוע בזכויות המשכיר לכל סעד משפטי אחר ו/או לתביעת תשלום פיצויים גבוהים יותר. הסכום הנ"ל ישולם בשקלים ישראליים לפי השער היציג של הדולר של ארה"ב המפורסם במועד התשלום.
+            </li>
+            <Element name="section8">
+            <h3
+              style={{
+                marginRight: -30,
+                textDecoration: "underline"
+              }}
+            >
+              תחזוקת המושכר
+            </h3>
+            </Element>
+            <li style={{ textAlign: "justify" }}>
+            השוכר מתחייב לשמור על הדירה והחפצים שמירה מעולה ולתקן ולחזור ולתקן  על חשבונו  ולשביעות רצון  המשכיר או ב"כ כל פגם או ליקוי במושכר כתוצאה משימוש בו על ידו או מי מטעמו מיד עם דרישת  המשכיר או בא  כוחו לכך ו/או מיד עם  התגלות הפגם  או הליקוי,  הכל לפי  המוקדם, למעט בלאי סביר ורגיל שיתהווה כתוצאה משימוש  סביר וזהיר.  השוכר מתחייב להחזיר למשכיר את המושכר מסודר, נקי ובמצב מעולה, למעט בלאי סביר כאמור לעיל.
+            היה והשוכר לא יתקן את הפגם או הליקוי במושכר שנוצר כתוצאה משימוש בו על ידו או מי מטעמו מיד עם דרישת  המשכיר או בא  כוחו לכך ו/או מיד עם  התגלות הפגם  או הליקוי כאמור לעיל, המשכיר רשאי לקזז את נזקיו הקצובים משכר הדירה החודשי כנגד קבלות/חשבוניות מס שימציא המשכיר לשוכר. 
+            </li>
+            <li style={{ textAlign: "justify" }}>
+            השוכר מצהיר כי קיבל את המושכר נקי, 
+            {" "}{this.state.description || "____________"}{" "}.
+            ומתאים למגורים,  ובמידה שהמושכר נמסר לידי השוכר כשהוא מסויד - השוכר מתחייב לסיידו על חשבונו עם החזרתו למשכיר.
+            {" "}{this.state.plastering && ('כן מתחייב השוכר לסייד את המושכר בתום תקופת השכירות.')}
+            </li>
+            <li style={{ textAlign: "justify" }}>
+            השוכר יפצה את המשכיר במלוא הנזקים שייגרמו לו כתוצאה מהפרת תנאי מתנאי סעיף זה או כל תנאי אחר מהסכם זה.
+            </li>
+            <li style={{ textAlign: "justify" }}>
+            המשכיר מצדו יהיה חייב לתקן פגמים ו/או קלקולים, שאינם תוצר של שימוש ובלאי סביר, אשר יתהוו במשך תקופת השכירות, והחובה לתקנם תהא עליו כמשכיר תוך זמן סביר מיום דרישת השוכר, כגון: נזילות בצנרת, תקלות במים דלוחים, בעיות במערכת החשמל המרכזית וכיו"ב.    
+           </li>
+           <li style={{ textAlign: "justify" }}>
+           אם ייגרמו לדירה נזקים שעל המשכיר לתקנם והמצריכים תיקון מיידי, והמשכיר לא יעשה כן תוך            
+           {" "}{this.state.hoursfix || "____________"}{" "}
+           שעות – יהיה השוכר רשאי לתקן על חשבונו, ועל המשכיר יהיה להחזיר לשוכר את הוצאותיו בגין קבלות שימציא השוכר למשכיר. היה  ולא יחזיר המשכיר לשוכר את הוצאות התיקונים הנ"ל, יהיה השוכר רשאי לקזזן מדמי השכירות עד כדי סך נזקיו הקצובים לאחר שהמציא למשכיר חשבוניות מס מאיש מקצוע.  
+           </li>
+           <li style={{ textAlign: "justify" }}>
+           השוכר יהיה אחראי על חשבונו לפצות צד ג' כלשהו על כל הנזקים שהוא עלול לגרום לו בגין השימוש במושכר, בין אם נגרם הנזק בו או בין מחוצה לו. כן על השוכר להחזיר למשכיר כל סכום שייתבע על ידו בקשר לנזקים כאמור, והכל אם נזקים אלו ייגרמו כתוצאה מרשלנותו של השוכר.
+           </li>
+           <li style={{ textAlign: "justify" }}>
+            היה והמושכר כולל מחסן ו/או גג ו/או שטח חקלאי מכל סוג ומין שהוא ו/או כל מקרקעין או מיטלטלין נלווה למושכר, השוכר מתחייב לשמור על תקינותם, שלמותם, שווים ותפקודם ולמוסרם לידי המשכיר בתום תקופת השכירות, כשהם במצב מעולה ותקין.
+            {" "}{this.state.insurance && (' כן השוכר מתחייב לבטח את כל אלה בהתאם לאמור בסעיפי הביטוח של הסכם זה.')}
+            </li>
+            {this.state.pool && (
+            <li style={{ textAlign: "justify" }}>
+            היה והמושכר כולל בריכה, השוכר מתחייב לשמור על תקינותה, שלמותה, שווייה ותפקודה ולמוסרה לידי המשכיר בתום תקופת השכירות, כשהיא במצב מעולה ותקין. כן על השוכר לשמור על ניקיונה, ובכלל זה לדאוג להחלפת אספקת הכלור בבריכה, ועל תקינות חדר המכונות של הבריכה על חשבונו במהלך תקופת השכירות ובתום תקופת השכירות.
+            {" "}{this.state.insurance && (' כן השוכר מתחייב לבטח את כל אלה בהתאם לאמור בסעיפי הביטוח של הסכם זה.')}
+            </li>
+            )}
+            {this.state.yard && (
+            <li style={{ textAlign: "justify" }}>
+            היה והמושכר כולל גינה, השוכר מתחייב לשמור על תקינותה, שלמותה, שווייה ותפקודה ולמוסרה לידי המשכיר בתום תקופת השכירות, כשהיא במצב מעולה ותקין. כן על השוכר לדאוג לטיפוח הגינה על חשבונו באמצעות כל האמצעים העומדים לרשותו במהלך תקופת השכירות.
+            {" "}{this.state.insurance && (' כן השוכר מתחייב לבטח את כל אלה בהתאם לאמור בסעיפי הביטוח של הסכם זה.')}
+            </li>
+            )}
+            <li style={{ textAlign: "justify" }}>
+            השוכר מתחייב לפנות את המושכר בתום התקופה הקצובה ולהחזיר את החזקה הבלעדית בה לידי המשכיר או בא כוחו, לרבות כל מפתח שניתן לו על ידי המשכיר.  
+            </li>
+            <li style={{ textAlign: "justify" }}>
+            השוכר מצהיר כי ראה ובדק את המושכר ומצא אותו במצב מעולה, תקין ומתאים לדרישותיו, והשוכר מוותר על כל טענת אי התאמה או טענה בקשר למושכר או בגין פגם ו/או מום גלוי ו/או נסתר ו/או נעלם. 
+            </li>
+            <li style={{ textAlign: "justify" }}>
+            המשכיר מצהיר כי היה והשוכר ימצא פגם, העולה כדי אי התאמה, במהלך תקופת השכירות, על המשכיר לתקן את המושכר בהתאם, ובכלל זה הזמנת איש מקצוע על חשבון המשכיר במידת הצורך. 
+            {" "}{this.state.showflaw && (' הפגמים המוסכמים על ידי הצדדים כאי התאמה הם:')}
+            {" "}{this.state.showflaw && (<div>{this.state.flaw || ""}</div>)}
+           </li>
+           <li style={{ textAlign: "justify" }}>
+           {this.state.pets || "השוכר אינו רשאי לגדל או להחזיק כל בעל חיים במושכר."} 
+          </li>
+          <li style={{ textAlign: "justify" }}>
+           {this.state.pets || "העישון בדירה אסור לחלוטין, כל עישון בדירה יחויב בקנס של 1,000 ₪. "} 
+          </li>
           </ol>
         </div>
       </div>
