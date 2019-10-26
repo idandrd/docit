@@ -63,6 +63,7 @@ class MainForm extends Component {
     yard: false,
     pets: "",
     smoking: "",
+    noticeshowapartment: "",
     erace1: true,
     showerace2: ""
   };
@@ -145,13 +146,13 @@ class MainForm extends Component {
           >
           <TabPane tab=" הנחיות" key="-1">
           <h1 style={{ textAlign: "center" }}>
-            {`ברוכים הבאים למחולל הסכמי השכירות הבלתי מוגנים `}
+            {`מערכת החוזים החכמים `}
           </h1>
-          <p style={{ textAlign: "right" }}>
-            {`הכנת הסכם שכירות בלתי מוגן, קל מתמיד, המרכיבים ליצור את הסכם השכירות הבלתי מוגן כבר נמצאים כאן(!) כל שעליכם לעשות זה לענות על כמה שאלות פשוטות, לבחור איזה סעיפים יכנסו לחוזה ואיזה לא ובום יש לכם חהסכם שכירות סטנדרטי מתואם במיוחד בשבילכם `}
+          <p style={{ textAlign: "right", fontSize: 16 }}>
+            {`ברוכים הבאים לעתיד החוזים בישראל, אנחנו מציעים להפוך את המסמכים המשפטיים שלכם למסמכים חכמים ופשוטים גם למי שלא בוגר תואר במשפטים או ללא כל ניסיון בתחום. מערכת חוזים חכמים יכולה להזניק אתכם לעתיד החוזים בישראל, למתג אתכם כחזית המשפטית בישראל וליצור עבורכם רשת לקוחות רחבה. `}
           </p>
-          <p style={{ textAlign: "right" }}>
-            {`*אגב בצד שמאל אתם יכולים לראות את ההסכם שלכם `}
+          <p style={{ textAlign: "right", fontSize: 16 }}>
+            {`אנו יוצרים את עתידנו וקוראים לזה גורל״ ~ בנימין ד׳יזראלי`}
           </p>
           <div style={{ display: "flex", justifyContent: "center"}}>
               <Button type="primary" 
@@ -164,14 +165,6 @@ class MainForm extends Component {
           </TabPane>
             <TabPane tab="הרחבות חוזה" key="0" style={{  justifyContent: "center", alignContent: "center"}}>
             <div style={{ display: "flex", justifyContent: "center"}}>
-            <img src="animals.png" alt="Italian Trulli" style={{ display: "flex", width: 200, height: 145, border: "solid",
-            borderRadius: 20, color: "white", margin: 5}}></img>
-            <img src="partners.png" alt="Italian Trulli" style={{ display: "flex", width: 200, height: 145, border: "solid",
-            borderRadius: 20, color: "white", margin: 5}}></img>
-            </div>
-            <div style={{ display: "flex", justifyContent: "center"}}>
-            <img src="smoking.png" alt="Italian Trulli" style={{ display: "flex", width: 200, height: 145,
-            borderRadius: 20, color: "white", margin: 5}}></img>
             <Button 
             type="primary"
             onClick={() =>  this.setState({ showOptionpPriod: !this.state.showOptionpPriod })}  
@@ -364,14 +357,18 @@ class MainForm extends Component {
                 <Icon type="right" />
                 הקודם
               </Button>
+
               <Button type="primary" onClick={() => this.handleTabChange("4")}>
                 שמור והמשך
                 <Icon type="left" />
+
               </Button>
+
               </div>
             </TabPane>
+            
             {this.state.showOptionpPriod && (
-            <TabPane tab=" תקותאופציה" key="4">
+            <TabPane tab=" תקופת האופציה" key="4">
               <FormItem text="באיזה יום בחודש ידרש השוכר לשלם את שכר הדירה / התמורה?">
                 <select
                   style={{ width: 132 }}
@@ -464,7 +461,7 @@ class MainForm extends Component {
             <div style={{ display: "flex", justifyContent: "center", marginBottom: 5}}>
             <Button 
             type="primary"
-            onClick={() =>  this.setState({ showchecks: !this.state.showchecks })}>
+            onClick={() => this.setState({ showEFT: !this.state.showEFT })}>
             תשלום בצ׳קים
             </Button>
             <Button 
@@ -647,6 +644,20 @@ class MainForm extends Component {
                 <option value="העישון בדירה אסור לחלוטין, כל עישון בדירה יחויב בקנס של 1,000 ₪.  ">אסור</option>
                 <option value="העישון בדירה אסור לחלוטין/אפשר לעשן רק במרפסת/כל עישון בדירה יחויב בקנס בסך של 1,000 ₪.">מותר</option>
 
+              </select>
+              </FormItem>
+              <FormItem text="תוך כמה זמן על המשכיר לתקן את הנזקים שעליו לתקן והמצריכים תיקון מיידי? ">
+                <select
+                style={{ width: 132 }}
+                value={this.state.noticeshowapartment}
+                onChange={({ target }) =>
+                  this.setState({ noticeshowapartment: target.value })
+                }
+              >
+                <option value="24 ">24 שעות</option>
+                <option value="48"> 48 שעות</option>
+                <option value="72">72 שעות</option>
+                <option value="_____ ">אחר </option>
               </select>
               </FormItem>
               <div style={{ display: "flex", justifyContent: "center"}}>
@@ -1014,6 +1025,18 @@ class MainForm extends Component {
           <li style={{ textAlign: "justify" }}>
            {this.state.pets || "העישון בדירה אסור לחלוטין, כל עישון בדירה יחויב בקנס של 1,000 ₪. "} 
           </li>
+          <li style={{ textAlign: "justify" }}>
+          השוכר מתחייב שלא לעשות כל שינוי במושכר או בסביבתו, בין בתוך המושכר ובין מחוצה לו  ובכל הקשור אליו או מחובר אליו וכן לא להוציא ולהעביר שום דבר מהחפצים ללא הסכמת המשכיר בכתב.          </li>
+          <li style={{ textAlign: "justify" }}>
+          היה והמשכיר הודיע לשוכר בהודעה בכתב כי יש באפשרותו לבצע שינויים במושכר, עליו לפרט את השינויים המוסכמים עליו במסגרת הודעתו כאמור. 
+          </li>
+          <li style={{ textAlign: "justify" }}>
+          היה והשוכר ביצע שינויים במושכר בהסכמת המשכיר כאמור, הברירה בידו אם להשיב את מצב המושכר לקדמותו עם תום תקופת השכירות ואם לאו. 
+          </li>
+          <li style={{ textAlign: "justify" }}>
+          השוכר מתחייב לאפשר למשכיר או לבא כוחו להיכנס למושכר בכל זמן סביר, וככל האפשר, לאחר תיאום מראש למטרת פיקוח ו/או לשם ביצוע תיקונים ו/או להצגת המושכר בפני אחר. זמן סביר ייחשב כ-
+          {" "}{this.state.noticeshowapartment || "____________"}{" "}
+          שעות טרם מועד הכניסה למושכר לצורך הסכם זה.           </li>
           </ol>
         </div>
       </div>
